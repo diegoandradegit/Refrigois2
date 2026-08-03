@@ -81,7 +81,7 @@ export const Formulario: React.FC<Props> = ({ variante = 'hero', id }) => {
     return (
       <div
         id={id}
-        className={`rounded-2xl p-6 sm:p-8 text-center ${
+        className={`rounded-lg p-6 sm:p-8 text-center ${
           escuro ? 'bg-white/10 backdrop-blur-sm ring-1 ring-white/20' : 'bg-brand-50 ring-1 ring-brand-200'
         }`}
       >
@@ -117,7 +117,7 @@ export const Formulario: React.FC<Props> = ({ variante = 'hero', id }) => {
       id={id}
       onSubmit={enviar}
       noValidate
-      className={`rounded-2xl p-5 sm:p-6 ${
+      className={`rounded-lg p-5 sm:p-6 ${
         escuro
           ? 'bg-slate-900/70 backdrop-blur-md ring-1 ring-white/15'
           : 'bg-white ring-1 ring-slate-200 shadow-lg'
@@ -173,9 +173,9 @@ export const Formulario: React.FC<Props> = ({ variante = 'hero', id }) => {
             </label>
             <select id={`${id}-tipo`} name="tipo_negocio" defaultValue="" className={campo}>
               <option value="">Selecione</option>
-              {SEGMENTOS.map((s) => (
-                <option key={s.slug} value={s.nome}>
-                  {s.nome}
+              {SEGMENTOS.map((nome) => (
+                <option key={nome} value={nome}>
+                  {nome}
                 </option>
               ))}
               <option value="Outro">Outro</option>
