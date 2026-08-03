@@ -4,14 +4,13 @@ import { EMPRESA_DADOS, ENDPOINT_LEAD, SEGMENTOS } from './conteudo';
 /**
  * Formulario da landing.
  *
- * Campos obrigatorios: nome, sobrenome, telefone, e-mail e segmento. Cidade e
- * o que sera armazenado ficam opcionais, para nao alongar o preenchimento no
- * celular, mas quando vem ja adiantam o levantamento.
+ * Obrigatorios: nome e telefone. Todo o resto e coletado, mas nao trava o
+ * envio.
  *
- * Vale saber ao ler os numeros da campanha: cada campo obrigatorio derruba um
- * pouco a taxa de preenchimento. O ganho e do outro lado — lead com segmento e
- * e-mail chega qualificado e permite retomada depois, o que compensa quando o
- * ticket e alto.
+ * O raciocinio: com nome e telefone valido ja da para trabalhar o lead, e cada
+ * campo obrigatorio a mais derruba a taxa de preenchimento. Os campos opcionais
+ * continuam na tela porque boa parte das pessoas preenche assim mesmo — e
+ * quando preenchem, o levantamento ja comeca adiantado.
  */
 
 type Estado = 'parado' | 'enviando' | 'enviado' | 'erro';
@@ -146,12 +145,11 @@ export const Formulario: React.FC<Props> = ({ variante = 'hero', id }) => {
           </div>
           <div>
             <label className={rotulo} htmlFor={`${id}-sobrenome`}>
-              Sobrenome
+              Sobrenome <span className="normal-case font-normal text-slate-500">(opcional)</span>
             </label>
             <input
               id={`${id}-sobrenome`}
               name="sobrenome"
-              required
               autoComplete="family-name"
               className={campo}
             />
@@ -176,12 +174,11 @@ export const Formulario: React.FC<Props> = ({ variante = 'hero', id }) => {
 
         <div>
           <label className={rotulo} htmlFor={`${id}-email`}>
-            E-mail
+            E-mail <span className="normal-case font-normal text-slate-500">(opcional)</span>
           </label>
           <input
             id={`${id}-email`}
             name="email"
-            required
             type="email"
             inputMode="email"
             autoComplete="email"
@@ -193,12 +190,10 @@ export const Formulario: React.FC<Props> = ({ variante = 'hero', id }) => {
         <div className="grid grid-cols-2 gap-3">
           <div>
             <label className={rotulo} htmlFor={`${id}-tipo`}>
-              Segmento
+              Segmento <span className="normal-case font-normal text-slate-500">(opcional)</span>
             </label>
-            <select id={`${id}-tipo`} name="tipo_negocio" required defaultValue="" className={campo}>
-              <option value="" disabled>
-                Selecione
-              </option>
+            <select id={`${id}-tipo`} name="tipo_negocio" defaultValue="" className={campo}>
+              <option value="">Selecione</option>
               {SEGMENTOS.map((nome) => (
                 <option key={nome} value={nome}>
                   {nome}
@@ -209,7 +204,7 @@ export const Formulario: React.FC<Props> = ({ variante = 'hero', id }) => {
           </div>
           <div>
             <label className={rotulo} htmlFor={`${id}-cidade`}>
-              Cidade
+              Cidade <span className="normal-case font-normal text-slate-500">(opcional)</span>
             </label>
             <input
               id={`${id}-cidade`}
@@ -222,7 +217,7 @@ export const Formulario: React.FC<Props> = ({ variante = 'hero', id }) => {
 
         <div>
           <label className={rotulo} htmlFor={`${id}-necessidade`}>
-            O que precisa armazenar <span className="normal-case font-normal">(opcional)</span>
+            O que precisa armazenar <span className="normal-case font-normal text-slate-500">(opcional)</span>
           </label>
           <textarea
             id={`${id}-necessidade`}
