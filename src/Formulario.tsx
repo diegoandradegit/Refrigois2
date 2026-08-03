@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { EMPRESA_DADOS, ENDPOINT_LEAD, SEGMENTOS } from './conteudo';
+import { lerRastreio } from './rastreio';
 
 /**
  * Formulario da landing.
@@ -57,6 +58,8 @@ export const Formulario: React.FC<Props> = ({ variante = 'hero', id }) => {
           tipo_negocio: dados.get('tipo_negocio'),
           necessidade: dados.get('necessidade'),
           website: dados.get('website'),
+          // De onde a pessoa veio: gclid do Ads, utm, referrer e aparelho.
+          ...lerRastreio(),
         }),
       });
 
