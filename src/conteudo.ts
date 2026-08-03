@@ -55,19 +55,85 @@ export const APLICACOES =
 /** Prova. Tres obras grandes; seis fotos pequenas viram enfeite. */
 export const OBRAS = [
   {
-    titulo: 'Câmara frigorífica industrial',
-    imagem: 'camara-frigorifica-industrial',
-    alt: 'Câmara frigorífica em painéis isotérmicos construída pela Refrigóis',
+    titulo: 'Câmara Fria para Supermercado',
+    linha: 'Resfriados e congelados na mesma operação, com alto giro',
+    imagem: 'refrigeracao-de-supermercado',
+    alt: 'Câmara fria e sistema de refrigeração instalados em supermercado',
   },
   {
-    titulo: 'Câmara com portas de vidro',
+    titulo: 'Câmara Fria para Açougue',
+    linha: 'Carnes resfriadas com temperatura estável o dia inteiro',
+    imagem: 'acougue-sao-jose-balcao-1',
+    alt: 'Câmara fria e balcões refrigerados instalados em açougue',
+  },
+  {
+    titulo: 'Câmara Fria para Distribuidora',
+    linha: 'Portas de vidro para exposição e autosserviço',
     imagem: 'camara-fria-portas-vidro',
     alt: 'Câmara fria com portas de vidro para distribuidora de bebidas',
   },
   {
-    titulo: 'Câmara resfriada para açougue',
+    titulo: 'Câmara Frigorífica Industrial',
+    linha: 'Painéis isotérmicos e sistema para grande volume',
+    imagem: 'camara-frigorifica-industrial',
+    alt: 'Câmara frigorífica industrial em painéis isotérmicos',
+  },
+  {
+    titulo: 'Câmara Resfriada sob Medida',
+    linha: 'Prateleiras e layout interno conforme o giro do produto',
     imagem: 'camara-fria-prateleiras',
     alt: 'Interior de câmara fria resfriada com prateleiras em aço inox',
+  },
+  {
+    titulo: 'Câmara Fria para Farmácia',
+    linha: 'Controle rigoroso para produtos termossensíveis',
+    imagem: 'refrigeracao-para-farmacia',
+    alt: 'Equipamento de refrigeração instalado em farmácia',
+  },
+];
+
+/** Selos de confianca do hero. Curtos: sao lidos em movimento, nao estudados. */
+export const SELOS = [
+  'Projeto sob medida',
+  'Fabricação própria',
+  'Instalação completa',
+  'Atendimento em todo o Paraná',
+];
+
+/**
+ * Diferenciais como argumento comercial: o titulo diz o que e, a linha de
+ * baixo diz por que isso muda alguma coisa para quem esta comprando.
+ */
+export const DIFERENCIAIS = [
+  {
+    titulo: 'Projeto sob medida',
+    texto:
+      'A câmara é desenhada para o seu espaço e o seu volume, em vez de você ter que adaptar a loja a um tamanho de catálogo.',
+  },
+  {
+    titulo: 'Fabricação própria',
+    texto:
+      'Sem intermediário entre o que foi combinado e o que é entregue. Você fala com quem projeta e com quem fabrica.',
+  },
+  {
+    titulo: 'Instalação completa',
+    texto:
+      'Painéis, unidades, tubulação, dreno e elétrica com a mesma equipe. Ninguém empurra responsabilidade para o eletricista da obra.',
+  },
+  {
+    titulo: 'Cálculo de carga térmica',
+    texto:
+      'A capacidade sai de cálculo, não de estimativa pelo tamanho. É o que separa câmara que segura temperatura no verão da que não segura.',
+  },
+  {
+    titulo: '12 meses de garantia',
+    texto:
+      'Garantia na instalação completa, com manutenção e higienização feitas pela mesma equipe que montou.',
+  },
+  {
+    titulo: '15 anos de refrigeração comercial',
+    texto:
+      'É o que fazemos desde sempre, e não uma linha a mais dentro de outra atividade.',
   },
 ];
 
@@ -93,63 +159,66 @@ export const ERROS = [
   },
 ];
 
-/** Sequencia real, e por isso vai numerada. */
+/** Jornada em seis passos: mostra que existe metodo, e que nada e improviso. */
 export const ETAPAS = [
   {
-    titulo: 'Levantamento',
-    texto:
-      'O que será armazenado, em que temperatura e com que movimento. Espaço disponível, ponto da condensadora e capacidade elétrica.',
+    titulo: 'Solicitação',
+    texto: 'Você preenche o formulário. Retornamos para entender a operação.',
+  },
+  {
+    titulo: 'Análise',
+    texto: 'Levantamento do produto, da temperatura, do movimento e do espaço.',
   },
   {
     titulo: 'Projeto',
-    texto:
-      'Capacidade do sistema, espessura do painel, tipo de porta e degelo. Você recebe a especificação item por item.',
+    texto: 'Capacidade, painel, porta e degelo definidos e especificados item a item.',
   },
   {
-    titulo: 'Execução',
-    texto:
-      'Painéis, unidades, tubulação frigorífica, dreno e elétrica. Acompanhado por quem fez o projeto, não por terceiros.',
+    titulo: 'Fabricação',
+    texto: 'Produção na nossa estrutura, na medida do que foi projetado.',
   },
   {
-    titulo: 'Partida',
-    texto:
-      'Sistema em operação, parâmetros ajustados, temperatura conferida em regime e a rotina de uso explicada.',
+    titulo: 'Instalação',
+    texto: 'Montagem, tubulação, dreno e elétrica com equipe própria.',
+  },
+  {
+    titulo: 'Entrega',
+    texto: 'Partida assistida, temperatura conferida em regime e rotina explicada.',
   },
 ];
 
-/** Cinco perguntas, cada uma removendo um motivo de nao preencher. */
+/** Cada pergunta remove um motivo concreto de nao pedir o orcamento. */
 export const FAQ = [
-  {
-    p: 'O que vocês precisam saber para dimensionar?',
-    r: 'Quatro informações resolvem a maior parte do cálculo: o que será armazenado, em que temperatura, quantas vezes a porta abre por dia e se o produto entra frio ou ainda quente. Com isso, mais o espaço e o ponto da condensadora, o dimensionamento sai de base técnica em vez de estimativa.',
-  },
   {
     p: 'Vocês atendem a minha cidade?',
     r: 'Atendemos todo o Paraná. Já executamos obras em Guaíra, Cascavel, Londrina e Foz do Iguaçu, então distância não é impedimento para projeto agendado.',
   },
   {
-    p: 'A câmara pode ser ampliada ou mudar de lugar depois?',
-    r: 'Pode. Ela é montada em painéis modulares encaixados, então dá para ampliar, remontar em outro ponto ou levar junto numa mudança de endereço. A ressalva é técnica: aumentar o volume exige reavaliar se o sistema comporta a nova carga térmica, porque câmara ampliada sem revisão de capacidade não alcança a temperatura desejada.',
+    p: 'Vocês fazem projeto personalizado ou é tamanho de catálogo?',
+    r: 'Personalizado. A câmara é modular e montada na medida do seu ponto: definimos capacidade, espessura de painel, tipo de porta e degelo a partir do que você armazena e de quanto espaço existe.',
   },
   {
-    p: 'Dá para instalar em espaço pequeno?',
-    r: 'Dá, e é situação comum em restaurantes e padarias. O que costuma limitar não é o espaço interno, e sim achar um local ventilado para a condensadora dissipar calor. Isso é avaliado no levantamento, antes de qualquer definição.',
+    p: 'A instalação é feita por vocês mesmos?',
+    r: 'Sim, do começo ao fim: painéis, unidades condensadora e evaporadora, tubulação frigorífica, dreno e ligação elétrica, com a nossa equipe. A instalação tem 12 meses de garantia.',
   },
   {
-    p: 'Qual a diferença entre câmara resfriada e de congelados?',
-    r: 'A resfriada trabalha entre 0 °C e 5 °C, para carnes frescas, hortifrúti, laticínios e bebidas. A de congelados vai de −18 °C a −25 °C. A diferença não está no ajuste do termostato: muda a capacidade do sistema, a espessura do painel e o tipo de degelo.',
+    p: 'Quanto tempo leva?',
+    r: 'Depende do porte e da agenda de fabricação, e por isso o prazo é fechado junto com o projeto, no levantamento. O que podemos garantir é que o prazo sai por escrito antes de a produção começar.',
   },
   {
-    p: 'Tem garantia? Vocês fazem manutenção depois?',
-    r: 'A instalação tem 12 meses de garantia. Manutenção, higienização e reforma são feitas pela nossa própria equipe, então quem instalou é quem assiste.',
+    p: 'E depois de instalar, quem dá assistência?',
+    r: 'A mesma equipe. Fazemos manutenção preventiva, corretiva, higienização e reforma, então você não fica procurando quem atende o equipamento depois.',
+  },
+  {
+    p: 'Como faço para solicitar o orçamento?',
+    r: 'Preencha o formulário com nome e telefone. Retornamos o contato para o levantamento, e o orçamento sai daí, não de tabela. Sem compromisso e sem cadastro.',
   },
 ];
 
 /**
- * Bloco sobre a empresa. Em servico tecnico, o comprador quer saber com quem
- * vai falar antes de mandar o contato — e a foto de quem responde faz mais por
- * isso do que qualquer adjetivo. Texto encurtado a partir do site principal:
- * la ele apresenta a empresa, aqui ele so precisa responder "posso confiar?".
+ * Bloco sobre a empresa. Em servico tecnico o comprador quer saber com quem
+ * vai falar antes de mandar o contato, e a foto de quem responde faz mais por
+ * isso do que qualquer adjetivo.
  */
 export const EMPRESA = {
   nome: 'Robert Góis',
@@ -164,4 +233,4 @@ export const EMPRESA = {
     { valor: 'PR', rotulo: 'atendimento em todo o estado' },
     { valor: '12', rotulo: 'meses de garantia na instalação' },
   ],
-};
+} as const;

@@ -1,16 +1,82 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Formulario } from './Formulario';
-import { APLICACOES, EMPRESA, EMPRESA_DADOS, ERROS, ETAPAS, FAQ, OBRAS } from './conteudo';
+import { ModalOrcamento } from './ModalOrcamento';
+import {
+  APLICACOES,
+  DIFERENCIAIS,
+  EMPRESA,
+  EMPRESA_DADOS,
+  ERROS,
+  ETAPAS,
+  FAQ,
+  OBRAS,
+  SELOS,
+} from './conteudo';
 
 /**
- * Landing de camara fria. Pagina unica, sem menu, um objetivo so.
+ * Landing de camara fria. Pagina unica, sem menu, um objetivo so: orcamento.
  *
- * A primeira versao tinha nove blocos, todos montados igual: titulo, paragrafo
- * de apoio e grade simetrica de cards. Repetido sete vezes, esse padrao e o que
- * faz uma pagina parecer gerada em serie. Aqui sao seis blocos e nenhum deles
- * repete a forma do anterior: foto grande, lista tipografica, faixa horizontal,
- * perguntas. A prova visual vem das fotos das obras, nao de icone.
+ * Regra de ouro daqui: todo caminho leva ao mesmo formulario. Nao ha link para
+ * o site principal, nao ha WhatsApp e nao existe um segundo formulario — as
+ * CTAs espalhadas abrem o modal, que reaproveita o mesmo componente do topo.
+ *
+ * A ordem dos blocos segue a duvida de quem chega frio do Google Ads:
+ * o que e -> ja fizeram isso? -> por que faria errado -> por que voces ->
+ * como funciona -> e as minhas duvidas -> pedir orcamento.
  */
+
+const Secao: React.FC<{
+  children: React.ReactNode;
+  className?: string;
+  id?: string;
+}> = ({ children, className = '', id }) => (
+  <section id={id} className={`px-5 py-16 sm:px-8 sm:py-20 ${className}`}>
+    <div className="mx-auto max-w-6xl">{children}</div>
+  </section>
+);
+
+const Titulo: React.FC<{ children: React.ReactNode; claro?: boolean }> = ({ children, claro }) => (
+  <h2
+    className={`text-2xl font-bold leading-tight sm:text-3xl md:text-[2rem] ${
+      claro ? 'text-white' : 'text-slate-900'
+    }`}
+  >
+    {children}
+  </h2>
+);
+
+/** Botao de conversao. Existe um so, para nenhuma CTA sair do padrao. */
+const BotaoOrcamento: React.FC<{
+  aoClicar: () => void;
+  children?: React.ReactNode;
+  claro?: boolean;
+  largo?: boolean;
+}> = ({ aoClicar, children = 'Solicitar orçamento', claro, largo }) => (
+  <button
+    onClick={aoClicar}
+    className={`rounded-lg px-7 py-3.5 text-base font-bold transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-400 ${
+      largo ? 'w-full sm:w-auto' : ''
+    } ${
+      claro
+        ? 'bg-white text-slate-900 hover:bg-slate-100'
+        : 'bg-brand-600 text-white hover:bg-brand-700'
+    }`}
+  >
+    {children}
+  </button>
+);
+
+/** Linha de fechamento repetida depois de cada bloco de argumento. */
+const ChamadaFinalDeBloco: React.FC<{ texto: string; aoClicar: () => void; claro?: boolean }> = ({
+  texto,
+  aoClicar,
+  claro,
+}) => (
+  <div className="mt-10 flex flex-col items-start gap-4 sm:flex-row sm:items-center">
+    <BotaoOrcamento aoClicar={aoClicar} claro={claro} />
+    <p className={`text-sm ${claro ? 'text-slate-400' : 'text-slate-500'}`}>{texto}</p>
+  </div>
+);
 
 const Foto: React.FC<{ nome: string; alt: string; className?: string }> = ({
   nome,
@@ -28,82 +94,118 @@ const Foto: React.FC<{ nome: string; alt: string; className?: string }> = ({
   />
 );
 
-export const App: React.FC = () => (
-  <div className="bg-white font-sans text-slate-900 antialiased">
-    {/* ── Topo: promessa, alcance e formulario sem precisar rolar ───────── */}
-    <header className="relative isolate flex min-h-[640px] items-center overflow-hidden bg-slate-950 lg:min-h-[720px]">
-      {/* Mesmo tratamento da hero do site principal: foto ocupando a tela
-          inteira e gradiente lateral que escurece o lado do texto e preserva a
-          imagem visivel do outro lado. */}
-      <picture className="absolute inset-0 -z-10 block h-full w-full">
-        <source
-          type="image/webp"
-          srcSet="/images/camara-frigorifica-industrial-640.webp 640w, /images/camara-frigorifica-industrial-1280.webp 1280w"
-          sizes="100vw"
-        />
-        <img
-          src="/images/camara-frigorifica-industrial-1280.webp"
-          alt=""
-          width={1280}
-          height={853}
-          fetchPriority="high"
-          className="h-full w-full object-cover"
-        />
-      </picture>
-      <div className="absolute inset-0 -z-10 bg-gradient-to-r from-slate-950 via-slate-950/85 to-slate-950/40 lg:via-slate-950/70 lg:to-slate-950/20" />
-      <div className="absolute inset-0 -z-10 bg-gradient-to-t from-slate-950/80 via-transparent to-slate-950/60" />
+export const App: React.FC = () => {
+  const [modal, setModal] = useState(false);
+  const abrir = () => setModal(true);
 
-      <div className="mx-auto w-full max-w-6xl px-5 py-12 sm:px-8 sm:py-16">
-        <img src="/logo.png" alt="Refrigóis" width={44} height={44} className="mb-9 h-11 w-auto" />
+  return (
+    <div className="bg-white font-sans text-slate-900 antialiased">
+      {/* ── Topo: o que é, para quem, por que nós, e como pedir ─────────── */}
+      <header className="relative isolate flex min-h-[640px] items-center overflow-hidden bg-slate-950 lg:min-h-[720px]">
+        <picture className="absolute inset-0 -z-10 block h-full w-full">
+          <source
+            type="image/webp"
+            srcSet="/images/camara-frigorifica-industrial-640.webp 640w, /images/camara-frigorifica-industrial-1280.webp 1280w"
+            sizes="100vw"
+          />
+          <img
+            src="/images/camara-frigorifica-industrial-1280.webp"
+            alt=""
+            width={1280}
+            height={853}
+            fetchPriority="high"
+            className="h-full w-full object-cover"
+          />
+        </picture>
+        <div className="absolute inset-0 -z-10 bg-gradient-to-r from-slate-950 via-slate-950/85 to-slate-950/40 lg:via-slate-950/70 lg:to-slate-950/20" />
+        <div className="absolute inset-0 -z-10 bg-gradient-to-t from-slate-950/80 via-transparent to-slate-950/60" />
 
-        <div className="grid gap-10 lg:grid-cols-[1fr_400px] lg:gap-16">
-          <div className="max-w-xl animate-fade-in-up">
-            <span className="mb-5 inline-block rounded-full border border-brand-400/50 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.3em] text-brand-300 backdrop-blur-sm md:text-xs">
-              Câmaras Frias · Todo o Paraná
-            </span>
-            <h1 className="text-[2rem] font-bold leading-[1.1] text-white drop-shadow-lg sm:text-5xl">
-              Câmara fria <span className="text-brand-400">modular</span>, montada no espaço que
-              você tem
-            </h1>
-            <p className="mt-5 max-w-lg text-base leading-relaxed text-slate-200 drop-shadow-md sm:text-lg">
-              Projeto, fabricação e instalação em todo o Paraná. Em painel modular, ela se ajusta à
-              medida do seu ponto e pode ser ampliada depois. O cálculo parte da carga térmica real
-              da operação, não do tamanho da câmara.
-            </p>
+        <div className="mx-auto w-full max-w-6xl px-5 py-12 sm:px-8 sm:py-16">
+          <img src="/logo.png" alt="Refrigóis" width={44} height={44} className="mb-9 h-11 w-auto" />
+
+          <div className="grid gap-10 lg:grid-cols-[1fr_400px] lg:gap-16">
+            <div className="max-w-xl animate-fade-in-up">
+              <span className="mb-5 inline-block rounded-full border border-brand-400/50 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.3em] text-brand-300 backdrop-blur-sm md:text-xs">
+                Câmaras Frias · Todo o Paraná
+              </span>
+
+              <h1 className="text-[2rem] font-bold leading-[1.1] text-white drop-shadow-lg sm:text-5xl">
+                Câmara fria <span className="text-brand-400">sob medida</span>, do projeto à
+                instalação
+              </h1>
+
+              <p className="mt-5 max-w-lg text-base leading-relaxed text-slate-200 drop-shadow-md sm:text-lg">
+                Fabricamos e instalamos câmaras frias e frigoríficas para açougues, supermercados,
+                restaurantes, padarias, distribuidoras e indústrias. Uma só empresa projeta,
+                fabrica, instala e assiste depois.
+              </p>
+
+              {/* Os quatro selos respondem "por que a Refrigóis" antes de a
+                  pessoa rolar. Ficam curtos porque sao lidos de relance. */}
+              <ul className="mt-7 grid gap-2.5 text-[15px] text-slate-100 sm:grid-cols-2">
+                {SELOS.map((selo) => (
+                  <li key={selo} className="flex items-center gap-2.5">
+                    <span aria-hidden="true" className="font-bold text-brand-400">
+                      ✓
+                    </span>
+                    {selo}
+                  </li>
+                ))}
+              </ul>
+
+              {/* No celular o formulario vira botao: manter as duas colunas
+                  empilhadas empurrava a prova e os selos para fora da tela. */}
+              <div className="mt-9 lg:hidden">
+                <BotaoOrcamento aoClicar={abrir} largo>
+                  Solicitar orçamento
+                </BotaoOrcamento>
+                <p className="mt-3 text-sm text-slate-400">
+                  Só nome e telefone. Sem compromisso e sem cadastro.
+                </p>
+              </div>
+            </div>
+
+            {/* No desktop sobra espaco: o formulario fica aberto, porque campo
+                a vista converte mais do que campo atras de um clique. */}
+            <div className="hidden lg:block">
+              <Formulario id="orcamento-topo" variante="hero" />
+            </div>
           </div>
-
-          <Formulario id="orcamento-topo" variante="hero" />
         </div>
-      </div>
-    </header>
+      </header>
 
-    {/* ── Prova primeiro: foto de obra propria vale mais que argumento ───── */}
-    <section className="mx-auto max-w-6xl px-5 py-16 sm:px-8 sm:py-20">
-      <h2 className="text-2xl font-bold sm:text-3xl">Obras nossas, fotografadas por nós</h2>
-      <div className="mt-8 grid gap-4 sm:grid-cols-3">
-        {OBRAS.map((obra) => (
-          <figure key={obra.imagem}>
-            <Foto nome={obra.imagem} alt={obra.alt} className="aspect-[4/3] w-full object-cover" />
-            <figcaption className="mt-2.5 text-sm text-slate-600">{obra.titulo}</figcaption>
-          </figure>
-        ))}
-      </div>
-      <p className="mt-8 max-w-3xl leading-relaxed text-slate-600">
-        Projetamos para {APLICACOES}. Muda o produto, muda a temperatura de trabalho, a espessura
-        do painel e o tipo de degelo. Por isso o dimensionamento vem antes do preço.
-      </p>
-    </section>
+      {/* ── Prova: obra real, com o segmento no titulo ───────────────────── */}
+      <Secao>
+        <Titulo>Câmaras que já entregamos</Titulo>
+        <p className="mt-3 max-w-2xl text-slate-600">
+          Fotos das nossas próprias instalações, não imagens de catálogo.
+        </p>
 
-    {/* ── O custo do erro. Lista tipografica, sem card e sem numeracao: ───
-        estes tres itens nao sao uma sequencia, sao um conjunto. ────────── */}
-    <section className="bg-slate-950 px-5 py-16 text-slate-300 sm:px-8 sm:py-20">
-      <div className="mx-auto max-w-6xl">
+        <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {OBRAS.map((obra) => (
+            <figure key={obra.imagem}>
+              <Foto nome={obra.imagem} alt={obra.alt} className="aspect-[4/3] w-full object-cover" />
+              <figcaption className="mt-3">
+                <p className="font-semibold text-slate-900">{obra.titulo}</p>
+                <p className="mt-0.5 text-sm leading-relaxed text-slate-600">{obra.linha}</p>
+              </figcaption>
+            </figure>
+          ))}
+        </div>
+
+        <ChamadaFinalDeBloco
+          aoClicar={abrir}
+          texto="Conte o que você precisa armazenar e dizemos o que a sua operação pede."
+        />
+      </Secao>
+
+      {/* ── O custo de errar: transforma "quanto custa" em "quanto custa
+          errar", que é o terreno onde a fabricante ganha do intermediário. ── */}
+      <Secao className="bg-slate-950 text-slate-300">
         <div className="max-w-2xl">
-          <h2 className="text-2xl font-bold leading-tight text-white sm:text-3xl">
-            Câmara mal instalada cobra a conta todo mês
-          </h2>
+          <Titulo claro>Câmara mal dimensionada cobra a conta todo mês</Titulo>
           <p className="mt-4 text-slate-400">
-            Nada disso aparece no dia da entrega. A câmara funciona, gela, e o problema só se
+            Nada disso aparece na entrega. A câmara gela, tudo parece certo, e o problema só se
             manifesta depois. São os três que mais encontramos quando nos chamam para corrigir
             instalação de terceiros.
           </p>
@@ -117,162 +219,165 @@ export const App: React.FC = () => (
             </div>
           ))}
         </dl>
-      </div>
-    </section>
 
-    {/* ── Quem atende. Vem logo depois dos erros de propósito: a seção
-        anterior diz o que dá errado, esta responde quem faz certo. ─────── */}
-    <section className="mx-auto max-w-6xl px-5 py-16 sm:px-8 sm:py-20">
-      <div className="grid gap-10 md:grid-cols-[minmax(0,300px)_1fr] md:items-start md:gap-14">
-        <img
-          src={EMPRESA.foto}
-          alt={`${EMPRESA.nome}, ${EMPRESA.papel}`}
-          loading="lazy"
-          decoding="async"
-          className="w-full max-w-[300px] object-cover"
+        <ChamadaFinalDeBloco
+          claro
+          aoClicar={abrir}
+          texto="O dimensionamento sai de cálculo de carga térmica, não de estimativa."
         />
-        <div>
-          <h2 className="text-2xl font-bold sm:text-3xl">Quem vai atender você</h2>
-          {EMPRESA.paragrafos.map((p) => (
-            <p key={p} className="mt-4 max-w-xl leading-relaxed text-slate-600">
-              {p}
-            </p>
-          ))}
-          <p className="mt-6 font-semibold">
-            {EMPRESA.nome}
-            <span className="ml-2 font-normal text-slate-500">{EMPRESA.papel}</span>
-          </p>
+      </Secao>
 
-          <dl className="mt-8 flex flex-wrap gap-x-10 gap-y-5 border-t border-slate-200 pt-6">
-            {EMPRESA.numeros.map((n) => (
-              <div key={n.rotulo}>
-                <dt className="text-3xl font-bold text-brand-600">{n.valor}</dt>
-                <dd className="mt-0.5 max-w-[10rem] text-sm text-slate-600">{n.rotulo}</dd>
-              </div>
+      {/* ── Diferenciais como argumento, não como lista de adjetivos ─────── */}
+      <Secao>
+        <Titulo>Por que fechar com a Refrigóis</Titulo>
+        <div className="mt-8 grid gap-x-10 gap-y-7 sm:grid-cols-2 lg:grid-cols-3">
+          {DIFERENCIAIS.map((d) => (
+            <div key={d.titulo}>
+              <p className="font-semibold text-slate-900">{d.titulo}</p>
+              <p className="mt-1.5 text-sm leading-relaxed text-slate-600">{d.texto}</p>
+            </div>
+          ))}
+        </div>
+
+        <ChamadaFinalDeBloco
+          aoClicar={abrir}
+          texto="Levantamento sem custo, feito por quem vai executar a obra."
+        />
+      </Secao>
+
+      {/* ── Quem atende: rosto e números antes de a pessoa deixar o contato ── */}
+      <Secao className="bg-slate-50">
+        <div className="grid gap-10 md:grid-cols-[minmax(0,280px)_1fr] md:items-start md:gap-14">
+          <img
+            src={EMPRESA.foto}
+            alt={`${EMPRESA.nome}, ${EMPRESA.papel}`}
+            loading="lazy"
+            decoding="async"
+            className="w-full max-w-[280px] object-cover"
+          />
+          <div>
+            <Titulo>Quem vai atender você</Titulo>
+            {EMPRESA.paragrafos.map((p) => (
+              <p key={p} className="mt-4 max-w-xl leading-relaxed text-slate-600">
+                {p}
+              </p>
             ))}
-          </dl>
-        </div>
-      </div>
-    </section>
+            <p className="mt-5 font-semibold">
+              {EMPRESA.nome}
+              <span className="ml-2 font-normal text-slate-500">{EMPRESA.papel}</span>
+            </p>
 
-    {/* ── Metodo: faixa horizontal enxuta. Aqui a ordem importa de verdade,
-        entao a numeracao carrega informacao em vez de decorar. ─────────── */}
-    <section className="mx-auto max-w-6xl px-5 py-16 sm:px-8 sm:py-20">
-      <h2 className="text-2xl font-bold sm:text-3xl">Do primeiro contato à partida</h2>
-      <ol className="mt-8 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-        {ETAPAS.map((etapa, i) => (
-          <li key={etapa.titulo}>
-            <span className="text-sm font-bold text-brand-600">{i + 1}</span>
-            <h3 className="mt-1 font-semibold">{etapa.titulo}</h3>
-            <p className="mt-1.5 text-sm leading-relaxed text-slate-600">{etapa.texto}</p>
-          </li>
-        ))}
-      </ol>
-      <div className="mt-10 flex items-center gap-5 border-l-2 border-brand-500 pl-5">
-        {/* Avatar da marca, o mesmo usado no site principal. Entra aqui para
-            quebrar a sequência de texto sem virar mais um ícone genérico. */}
-        <img
-          src="/images/mascote/entrega.webp"
-          alt=""
-          width={110}
-          height={110}
-          loading="lazy"
-          decoding="async"
-          className="hidden h-28 w-28 shrink-0 object-contain sm:block"
-        />
-        <p className="max-w-2xl text-slate-600">
-          Resfriados de 0 °C a 5 °C e congelados de −18 °C a −25 °C, em painel EPS ou PUR, com
-          porta de giro, de correr ou de vidro. Instalação com 12 meses de garantia e manutenção
-          feita pela mesma equipe.
+            <dl className="mt-8 flex flex-wrap gap-x-10 gap-y-5 border-t border-slate-200 pt-6">
+              {EMPRESA.numeros.map((n) => (
+                <div key={n.rotulo}>
+                  <dt className="text-3xl font-bold text-brand-600">{n.valor}</dt>
+                  <dd className="mt-0.5 max-w-[10rem] text-sm text-slate-600">{n.rotulo}</dd>
+                </div>
+              ))}
+            </dl>
+          </div>
+        </div>
+      </Secao>
+
+      {/* ── Como funciona: seis passos, do pedido à entrega ──────────────── */}
+      <Secao>
+        <Titulo>Do pedido à entrega</Titulo>
+        <p className="mt-3 max-w-2xl text-slate-600">
+          O orçamento sai do levantamento, não de tabela. Por isso a primeira conversa é sobre a sua
+          operação, e não sobre o equipamento.
         </p>
-      </div>
-    </section>
 
-    {/* ── Perguntas: cada uma tira um motivo de nao preencher ────────────── */}
-    <section className="bg-slate-50 px-5 py-16 sm:px-8 sm:py-20">
-      <div className="mx-auto max-w-3xl">
-        <h2 className="text-2xl font-bold sm:text-3xl">Perguntas frequentes</h2>
-        <div className="mt-8 divide-y divide-slate-200 border-y border-slate-200">
-          {FAQ.map((item) => (
-            <details key={item.p} className="group py-4">
-              <summary className="flex cursor-pointer list-none items-center justify-between gap-4 font-semibold focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-500">
-                {item.p}
-                <span
-                  aria-hidden="true"
-                  className="shrink-0 text-xl font-normal text-brand-600 transition group-open:rotate-45"
-                >
-                  +
-                </span>
-              </summary>
-              <p className="mt-3 leading-relaxed text-slate-600">{item.r}</p>
-            </details>
+        <ol className="mt-9 grid gap-7 sm:grid-cols-2 lg:grid-cols-3">
+          {ETAPAS.map((etapa, i) => (
+            <li key={etapa.titulo} className="border-t-2 border-brand-500 pt-4">
+              <span aria-hidden="true" className="text-sm font-bold text-brand-600">
+                {String(i + 1).padStart(2, '0')}
+              </span>
+              <h3 className="mt-1 font-semibold">{etapa.titulo}</h3>
+              <p className="mt-1.5 text-sm leading-relaxed text-slate-600">{etapa.texto}</p>
+            </li>
           ))}
-        </div>
-      </div>
-    </section>
+        </ol>
 
-    {/* ── Fechamento ────────────────────────────────────────────────────── */}
-    <section id="orcamento" className="bg-slate-950 px-5 py-16 sm:px-8 sm:py-20">
-      <div className="mx-auto grid max-w-6xl gap-12 lg:grid-cols-[1fr_400px] lg:items-center lg:gap-16">
-        <div className="max-w-lg">
-          <h2 className="text-2xl font-bold leading-tight text-white sm:text-3xl">
-            Conte o que precisa armazenar
-          </h2>
-          <p className="mt-4 text-slate-400">
-            A partir daí conseguimos dizer o que a sua operação pede: capacidade, painel, porta e
-            degelo. O orçamento sai do levantamento, não de tabela.
-          </p>
-          <p className="mt-6 text-sm text-slate-500">
-            Levantamento sem custo e sem compromisso.
-          </p>
-        </div>
-        <Formulario id="orcamento-fim" variante="hero" />
-      </div>
-    </section>
+        <ChamadaFinalDeBloco aoClicar={abrir} texto="O passo 1 leva menos de um minuto." />
+      </Secao>
 
-    {/* Dados oficiais: identificam a empresa e sustentam a confianca de quem
-        vai deixar o contato. Ficam no rodape, e nao como chamada concorrente. */}
-    <footer className="border-t border-white/10 bg-slate-950 px-5 pb-24 pt-10 sm:px-8 sm:pb-12">
-      <div className="mx-auto grid max-w-6xl gap-6 text-sm text-slate-400 sm:grid-cols-2">
-        <div>
-          <p className="font-semibold text-slate-200">{EMPRESA_DADOS.razao}</p>
-          <p className="mt-2">CNPJ {EMPRESA_DADOS.cnpj}</p>
-          <p className="mt-1">{EMPRESA_DADOS.endereco}</p>
-          <p>{EMPRESA_DADOS.cidade}</p>
-        </div>
-        <div className="sm:text-right">
-          <p>
-            <a
-              href={`mailto:${EMPRESA_DADOS.email}`}
-              className="hover:text-slate-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-400"
-            >
-              {EMPRESA_DADOS.email}
-            </a>
-          </p>
-          <p className="mt-1">
-            <a
-              href={`tel:${EMPRESA_DADOS.telefoneLink}`}
-              className="hover:text-slate-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-400"
-            >
-              {EMPRESA_DADOS.telefone}
-            </a>
-          </p>
-          <p className="mt-4 text-xs text-slate-600">
-            Atendimento em todo o Paraná · Refrigeração comercial
-          </p>
-        </div>
-      </div>
-    </footer>
+      {/* ── Perguntas: cada uma remove um motivo de não pedir ────────────── */}
+      <Secao className="bg-slate-50">
+        <div className="max-w-3xl">
+          <Titulo>Perguntas frequentes</Titulo>
+          <div className="mt-8 divide-y divide-slate-200 border-y border-slate-200">
+            {FAQ.map((item) => (
+              <details key={item.p} className="group py-4">
+                <summary className="flex cursor-pointer list-none items-center justify-between gap-4 font-semibold focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-500">
+                  {item.p}
+                  <span
+                    aria-hidden="true"
+                    className="shrink-0 text-xl font-normal text-brand-600 transition group-open:rotate-45"
+                  >
+                    +
+                  </span>
+                </summary>
+                <p className="mt-3 leading-relaxed text-slate-600">{item.r}</p>
+              </details>
+            ))}
+          </div>
 
-    {/* Barra fixa no celular: o visitante rola bastante e o botao precisa
-        estar sempre a um toque. Some no desktop, onde o formulario ja aparece. */}
-    <div className="fixed inset-x-0 bottom-0 z-50 border-t border-slate-800 bg-slate-950/95 p-3 backdrop-blur sm:hidden">
-      <a
-        href="#orcamento"
-        className="block rounded bg-brand-600 px-4 py-3 text-center text-sm font-bold text-white"
-      >
-        Pedir orçamento
-      </a>
+          <ChamadaFinalDeBloco aoClicar={abrir} texto="Ficou outra dúvida? Pergunte no formulário." />
+        </div>
+      </Secao>
+
+      {/* ── Fechamento ──────────────────────────────────────────────────── */}
+      <Secao className="bg-slate-950" id="orcamento">
+        <div className="grid gap-10 lg:grid-cols-[1fr_minmax(0,420px)] lg:items-center lg:gap-16">
+          <div className="max-w-lg">
+            <Titulo claro>Conte o que você precisa armazenar</Titulo>
+            <p className="mt-4 text-slate-400">
+              A partir daí conseguimos dizer o que a sua operação pede: capacidade, painel, porta e
+              degelo. Projetamos para {APLICACOES}.
+            </p>
+          </div>
+          <Formulario id="orcamento-fim" variante="hero" />
+        </div>
+      </Secao>
+
+      <footer className="border-t border-white/10 bg-slate-950 px-5 pb-24 pt-10 sm:px-8 sm:pb-12">
+        <div className="mx-auto grid max-w-6xl gap-6 text-sm text-slate-400 sm:grid-cols-2">
+          <div>
+            <p className="font-semibold text-slate-200">{EMPRESA_DADOS.razao}</p>
+            <p className="mt-2">CNPJ {EMPRESA_DADOS.cnpj}</p>
+            <p className="mt-1">{EMPRESA_DADOS.endereco}</p>
+            <p>{EMPRESA_DADOS.cidade}</p>
+          </div>
+          <div className="sm:text-right">
+            <p>
+              <a href={`mailto:${EMPRESA_DADOS.email}`} className="hover:text-slate-200">
+                {EMPRESA_DADOS.email}
+              </a>
+            </p>
+            <p className="mt-1">
+              <a href={`tel:${EMPRESA_DADOS.telefoneLink}`} className="hover:text-slate-200">
+                {EMPRESA_DADOS.telefone}
+              </a>
+            </p>
+            <p className="mt-4 text-xs text-slate-600">
+              Atendimento em todo o Paraná · Refrigeração comercial
+            </p>
+          </div>
+        </div>
+      </footer>
+
+      {/* Barra fixa no celular: a CTA acompanha a rolagem inteira. */}
+      <div className="fixed inset-x-0 bottom-0 z-50 border-t border-slate-800 bg-slate-950/95 p-3 backdrop-blur sm:hidden">
+        <button
+          onClick={abrir}
+          className="block w-full rounded-lg bg-brand-600 px-4 py-3.5 text-center text-sm font-bold text-white"
+        >
+          Solicitar orçamento
+        </button>
+      </div>
+
+      <ModalOrcamento aberto={modal} aoFechar={() => setModal(false)} />
     </div>
-  </div>
-);
+  );
+};
