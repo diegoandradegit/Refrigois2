@@ -117,3 +117,24 @@ export const FAQ = [
     r: 'A instalação tem 12 meses de garantia. Manutenção, higienização e reforma são feitas pela nossa própria equipe, então quem instalou é quem assiste.',
   },
 ];
+
+/**
+ * Bloco sobre a empresa. Em servico tecnico, o comprador quer saber com quem
+ * vai falar antes de mandar o contato — e a foto de quem responde faz mais por
+ * isso do que qualquer adjetivo. Texto encurtado a partir do site principal:
+ * la ele apresenta a empresa, aqui ele so precisa responder "posso confiar?".
+ */
+export const EMPRESA = {
+  nome: 'Robert Góis',
+  papel: 'Fundador da Refrigóis',
+  foto: '/images/sobre/robert-escritorio.webp',
+  paragrafos: [
+    'São 15 anos de refrigeração comercial atendendo açougues, mercados, padarias, restaurantes e distribuidoras em todo o Paraná.',
+    'Cada projeto passa pelas mãos de quem responde por ele. Você fala com quem dimensiona, acompanha a obra e volta se precisar de manutenção anos depois.',
+  ],
+  numeros: [
+    { valor: '15', rotulo: 'anos de refrigeração comercial' },
+    { valor: 'PR', rotulo: 'atendimento em todo o estado' },
+    { valor: '12', rotulo: 'meses de garantia na instalação' },
+  ],
+};

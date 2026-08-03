@@ -1,6 +1,6 @@
 import React from 'react';
 import { Formulario } from './Formulario';
-import { ERROS, ETAPAS, FAQ, OBRAS, TELEFONE, linkWhatsApp } from './conteudo';
+import { EMPRESA, ERROS, ETAPAS, FAQ, OBRAS, TELEFONE, linkWhatsApp } from './conteudo';
 
 /**
  * Landing de camara fria. Pagina unica, sem menu, um objetivo so.
@@ -120,6 +120,41 @@ export const App: React.FC = () => (
       </div>
     </section>
 
+    {/* ── Quem atende. Vem logo depois dos erros de propósito: a seção
+        anterior diz o que dá errado, esta responde quem faz certo. ─────── */}
+    <section className="mx-auto max-w-6xl px-5 py-16 sm:px-8 sm:py-20">
+      <div className="grid gap-10 md:grid-cols-[minmax(0,300px)_1fr] md:items-start md:gap-14">
+        <img
+          src={EMPRESA.foto}
+          alt={`${EMPRESA.nome}, ${EMPRESA.papel}`}
+          loading="lazy"
+          decoding="async"
+          className="w-full max-w-[300px] object-cover"
+        />
+        <div>
+          <h2 className="text-2xl font-bold sm:text-3xl">Quem vai atender você</h2>
+          {EMPRESA.paragrafos.map((p) => (
+            <p key={p} className="mt-4 max-w-xl leading-relaxed text-slate-600">
+              {p}
+            </p>
+          ))}
+          <p className="mt-6 font-semibold">
+            {EMPRESA.nome}
+            <span className="ml-2 font-normal text-slate-500">{EMPRESA.papel}</span>
+          </p>
+
+          <dl className="mt-8 flex flex-wrap gap-x-10 gap-y-5 border-t border-slate-200 pt-6">
+            {EMPRESA.numeros.map((n) => (
+              <div key={n.rotulo}>
+                <dt className="text-3xl font-bold text-brand-600">{n.valor}</dt>
+                <dd className="mt-0.5 max-w-[10rem] text-sm text-slate-600">{n.rotulo}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+      </div>
+    </section>
+
     {/* ── Metodo: faixa horizontal enxuta. Aqui a ordem importa de verdade,
         entao a numeracao carrega informacao em vez de decorar. ─────────── */}
     <section className="mx-auto max-w-6xl px-5 py-16 sm:px-8 sm:py-20">
@@ -133,11 +168,24 @@ export const App: React.FC = () => (
           </li>
         ))}
       </ol>
-      <p className="mt-10 max-w-2xl border-l-2 border-brand-500 pl-5 text-slate-600">
-        Resfriados de 0 °C a 5 °C e congelados de −18 °C a −25 °C, em painel EPS ou PUR, com porta
-        de giro, de correr ou de vidro. Instalação com 12 meses de garantia e manutenção feita pela
-        mesma equipe.
-      </p>
+      <div className="mt-10 flex items-center gap-5 border-l-2 border-brand-500 pl-5">
+        {/* Avatar da marca, o mesmo usado no site principal. Entra aqui para
+            quebrar a sequência de texto sem virar mais um ícone genérico. */}
+        <img
+          src="/images/mascote/entrega.webp"
+          alt=""
+          width={110}
+          height={110}
+          loading="lazy"
+          decoding="async"
+          className="hidden h-28 w-28 shrink-0 object-contain sm:block"
+        />
+        <p className="max-w-2xl text-slate-600">
+          Resfriados de 0 °C a 5 °C e congelados de −18 °C a −25 °C, em painel EPS ou PUR, com
+          porta de giro, de correr ou de vidro. Instalação com 12 meses de garantia e manutenção
+          feita pela mesma equipe.
+        </p>
+      </div>
     </section>
 
     {/* ── Perguntas: cada uma tira um motivo de nao preencher ────────────── */}
