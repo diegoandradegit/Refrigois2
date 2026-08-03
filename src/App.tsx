@@ -1,6 +1,6 @@
 import React from 'react';
 import { Formulario } from './Formulario';
-import { EMPRESA, ERROS, ETAPAS, FAQ, OBRAS, TELEFONE, linkWhatsApp } from './conteudo';
+import { APLICACOES, EMPRESA, ERROS, ETAPAS, FAQ, OBRAS, TELEFONE, linkWhatsApp } from './conteudo';
 
 /**
  * Landing de camara fria. Pagina unica, sem menu, um objetivo so.
@@ -57,11 +57,12 @@ export const App: React.FC = () => (
         <div className="grid gap-12 lg:grid-cols-[1fr_400px] lg:gap-16">
           <div className="max-w-xl">
             <h1 className="text-[2rem] font-bold leading-[1.1] text-white sm:text-5xl">
-              Câmara fria dimensionada para o que você guarda
+              Câmara fria modular, montada no espaço que você tem
             </h1>
             <p className="mt-5 text-lg leading-relaxed text-slate-300">
-              Projeto, fabricação e instalação em todo o Paraná. O cálculo parte da carga térmica
-              real da sua operação, não do tamanho da câmara.
+              Projeto, fabricação e instalação em todo o Paraná. Em painel modular, ela se ajusta à
+              medida do seu ponto e pode ser ampliada depois. O cálculo parte da carga térmica real
+              da operação, não do tamanho da câmara.
             </p>
             <p className="mt-8 text-sm text-slate-400">
               Prefere conversar?{' '}
@@ -92,6 +93,10 @@ export const App: React.FC = () => (
           </figure>
         ))}
       </div>
+      <p className="mt-8 max-w-3xl leading-relaxed text-slate-600">
+        Projetamos para {APLICACOES}. Muda o produto, muda a temperatura de trabalho, a espessura
+        do painel e o tipo de degelo. Por isso o dimensionamento vem antes do preço.
+      </p>
     </section>
 
     {/* ── O custo do erro. Lista tipografica, sem card e sem numeracao: ───

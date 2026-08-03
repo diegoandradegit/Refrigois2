@@ -22,12 +22,24 @@ export const ENDPOINT_LEAD =
 /** Usado so no seletor do formulario. Nao vira secao de cards na pagina. */
 export const SEGMENTOS = [
   'Açougue',
-  'Supermercado',
-  'Restaurante',
-  'Padaria',
-  'Distribuidora',
-  'Farmácia',
+  'Supermercado ou mercearia',
+  'Restaurante ou cozinha industrial',
+  'Padaria ou confeitaria',
+  'Distribuidora de bebidas',
+  'Bar, choperia ou adega',
+  'Hortifrúti',
+  'Farmácia ou laboratório',
+  'Indústria ou logística',
 ];
+
+/**
+ * Lista de aplicacoes em texto corrido, e nao em grade de cards.
+ * Serve para dois publicos: quem chega buscando o proprio caso ("camara fria
+ * para acougue", "para chopp") e o Google, que precisa ver que a pagina cobre
+ * a categoria inteira, e nao um nicho so.
+ */
+export const APLICACOES =
+  'carnes e resfriados em açougue, estoque de supermercado e mercearia, cozinha de restaurante, padaria e confeitaria, bebidas em distribuidora, barril de chopp em bar e choperia, hortifrúti, medicamentos e imunobiológicos em farmácia e laboratório, congelados e insumos de indústria';
 
 /** Prova. Tres obras grandes; seis fotos pequenas viram enfeite. */
 export const OBRAS = [
@@ -103,6 +115,10 @@ export const FAQ = [
   {
     p: 'Vocês atendem a minha cidade?',
     r: 'Atendemos todo o Paraná. Já executamos obras em Guaíra, Cascavel, Londrina e Foz do Iguaçu, então distância não é impedimento para projeto agendado.',
+  },
+  {
+    p: 'A câmara pode ser ampliada ou mudar de lugar depois?',
+    r: 'Pode. Ela é montada em painéis modulares encaixados, então dá para ampliar, remontar em outro ponto ou levar junto numa mudança de endereço. A ressalva é técnica: aumentar o volume exige reavaliar se o sistema comporta a nova carga térmica, porque câmara ampliada sem revisão de capacidade não alcança a temperatura desejada.',
   },
   {
     p: 'Dá para instalar em espaço pequeno?',
