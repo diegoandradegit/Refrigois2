@@ -8,12 +8,23 @@
 // busca de Cascavel ou de Londrina precisa se sentir atendido, e nao avisado
 // de que a empresa fica longe.
 
-export const WHATSAPP = '5544999368420';
-export const TELEFONE = '+5544999368420';
-
-export function linkWhatsApp(mensagem: string): string {
-  return `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(mensagem)}`;
-}
+/**
+ * Dados oficiais, os mesmos do site principal.
+ *
+ * Nao ha link de WhatsApp nesta pagina de proposito: cada saida alternativa
+ * divide a atencao e reduz o preenchimento do formulario, que e o objetivo
+ * unico daqui. Telefone e e-mail aparecem so no rodape, como identificacao da
+ * empresa, e nao como chamada concorrente.
+ */
+export const EMPRESA_DADOS = {
+  razao: 'Refrigóis Refrigeração Comercial',
+  cnpj: '41.179.761/0001-30',
+  endereco: 'Rua Pioneira Gertrude Heck Fritzen, 5821 — Conj. João de Barro I',
+  cidade: 'Maringá - PR, 87053-124',
+  telefone: '(44) 99936-8420',
+  telefoneLink: '+5544999368420',
+  email: 'contato@refrigois.com.br',
+};
 
 export const ENDPOINT_LEAD =
   import.meta.env.VITE_ENDPOINT_LEAD ??

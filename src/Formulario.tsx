@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ENDPOINT_LEAD, SEGMENTOS, linkWhatsApp } from './conteudo';
+import { EMPRESA_DADOS, ENDPOINT_LEAD, SEGMENTOS } from './conteudo';
 
 /**
  * Formulario da landing.
@@ -62,7 +62,7 @@ export const Formulario: React.FC<Props> = ({ variante = 'hero', id }) => {
         setEstado('erro');
         setMensagem(
           corpo.erro ??
-            'Não consegui enviar agora. Chame no WhatsApp que respondemos na hora.',
+            `Não consegui enviar agora. Ligue para ${EMPRESA_DADOS.telefone} que atendemos na hora.`,
         );
         return;
       }
@@ -72,7 +72,7 @@ export const Formulario: React.FC<Props> = ({ variante = 'hero', id }) => {
     } catch {
       setEstado('erro');
       setMensagem(
-        'Sem conexão com o servidor. Confira a internet ou chame no WhatsApp que respondemos na hora.',
+        `Sem conexão com o servidor. Confira a internet ou ligue para ${EMPRESA_DADOS.telefone}.`,
       );
     }
   }
@@ -88,17 +88,9 @@ export const Formulario: React.FC<Props> = ({ variante = 'hero', id }) => {
         <p className={`text-xl font-bold mb-2 ${escuro ? 'text-white' : 'text-slate-900'}`}>
           Contato recebido
         </p>
-        <p className={`text-sm mb-6 ${escuro ? 'text-slate-200' : 'text-slate-600'}`}>
-          Retornamos pelo WhatsApp. Se preferir adiantar, fale com a gente agora.
+        <p className={`text-sm ${escuro ? 'text-slate-300' : 'text-slate-600'}`}>
+          Entramos em contato pelo número que você deixou para fazer o levantamento.
         </p>
-        <a
-          href={linkWhatsApp('Olá! Acabei de pedir um orçamento de câmara fria pelo site.')}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center justify-center rounded-lg bg-brand-600 px-6 py-3 font-bold text-white transition hover:bg-brand-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-400"
-        >
-          Falar agora no WhatsApp
-        </a>
       </div>
     );
   }
@@ -216,20 +208,12 @@ export const Formulario: React.FC<Props> = ({ variante = 'hero', id }) => {
 
         {estado === 'erro' && (
           <p role="alert" className="text-sm font-medium text-red-400">
-            {mensagem}{' '}
-            <a
-              href={linkWhatsApp('Olá! Tentei pedir um orçamento de câmara fria pelo site.')}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="underline"
-            >
-              Abrir o WhatsApp
-            </a>
+            {mensagem}
           </p>
         )}
 
         <p className={`text-xs ${escuro ? 'text-slate-400' : 'text-slate-500'}`}>
-          Retornamos pelo WhatsApp. Sem compromisso e sem cadastro.
+          Retornamos o contato para fazer o levantamento. Sem compromisso e sem cadastro.
         </p>
       </div>
     </form>

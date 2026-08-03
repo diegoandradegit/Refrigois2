@@ -1,6 +1,6 @@
 import React from 'react';
 import { Formulario } from './Formulario';
-import { APLICACOES, EMPRESA, ERROS, ETAPAS, FAQ, OBRAS, TELEFONE, linkWhatsApp } from './conteudo';
+import { APLICACOES, EMPRESA, EMPRESA_DADOS, ERROS, ETAPAS, FAQ, OBRAS } from './conteudo';
 
 /**
  * Landing de camara fria. Pagina unica, sem menu, um objetivo so.
@@ -11,8 +11,6 @@ import { APLICACOES, EMPRESA, ERROS, ETAPAS, FAQ, OBRAS, TELEFONE, linkWhatsApp 
  * repete a forma do anterior: foto grande, lista tipografica, faixa horizontal,
  * perguntas. A prova visual vem das fotos das obras, nao de icone.
  */
-
-const MSG_WHATS = 'Olá! Quero um orçamento de câmara fria.';
 
 const Foto: React.FC<{ nome: string; alt: string; className?: string }> = ({
   nome,
@@ -33,7 +31,10 @@ const Foto: React.FC<{ nome: string; alt: string; className?: string }> = ({
 export const App: React.FC = () => (
   <div className="bg-white font-sans text-slate-900 antialiased">
     {/* ── Topo: promessa, alcance e formulario sem precisar rolar ───────── */}
-    <header className="relative isolate overflow-hidden bg-slate-950">
+    <header className="relative isolate flex min-h-[640px] items-center overflow-hidden bg-slate-950 lg:min-h-[720px]">
+      {/* Mesmo tratamento da hero do site principal: foto ocupando a tela
+          inteira e gradiente lateral que escurece o lado do texto e preserva a
+          imagem visivel do outro lado. */}
       <picture className="absolute inset-0 -z-10 block h-full w-full">
         <source
           type="image/webp"
@@ -46,34 +47,28 @@ export const App: React.FC = () => (
           width={1280}
           height={853}
           fetchPriority="high"
-          className="h-full w-full object-cover opacity-45"
+          className="h-full w-full object-cover"
         />
       </picture>
-      <div className="absolute inset-0 -z-10 bg-gradient-to-b from-slate-950 via-slate-950/85 to-slate-950" />
+      <div className="absolute inset-0 -z-10 bg-gradient-to-r from-slate-950 via-slate-950/85 to-slate-950/40 lg:via-slate-950/70 lg:to-slate-950/20" />
+      <div className="absolute inset-0 -z-10 bg-gradient-to-t from-slate-950/80 via-transparent to-slate-950/60" />
 
-      <div className="mx-auto max-w-6xl px-5 pb-14 pt-8 sm:px-8 sm:pb-20 sm:pt-10">
-        <img src="/logo.png" alt="Refrigóis" width={44} height={44} className="mb-10 h-11 w-auto" />
+      <div className="mx-auto w-full max-w-6xl px-5 py-12 sm:px-8 sm:py-16">
+        <img src="/logo.png" alt="Refrigóis" width={44} height={44} className="mb-9 h-11 w-auto" />
 
-        <div className="grid gap-12 lg:grid-cols-[1fr_400px] lg:gap-16">
-          <div className="max-w-xl">
-            <h1 className="text-[2rem] font-bold leading-[1.1] text-white sm:text-5xl">
-              Câmara fria modular, montada no espaço que você tem
+        <div className="grid gap-10 lg:grid-cols-[1fr_400px] lg:gap-16">
+          <div className="max-w-xl animate-fade-in-up">
+            <span className="mb-5 inline-block rounded-full border border-brand-400/50 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.3em] text-brand-300 backdrop-blur-sm md:text-xs">
+              Câmaras Frias · Todo o Paraná
+            </span>
+            <h1 className="text-[2rem] font-bold leading-[1.1] text-white drop-shadow-lg sm:text-5xl">
+              Câmara fria <span className="text-brand-400">modular</span>, montada no espaço que
+              você tem
             </h1>
-            <p className="mt-5 text-lg leading-relaxed text-slate-300">
+            <p className="mt-5 max-w-lg text-base leading-relaxed text-slate-200 drop-shadow-md sm:text-lg">
               Projeto, fabricação e instalação em todo o Paraná. Em painel modular, ela se ajusta à
               medida do seu ponto e pode ser ampliada depois. O cálculo parte da carga térmica real
               da operação, não do tamanho da câmara.
-            </p>
-            <p className="mt-8 text-sm text-slate-400">
-              Prefere conversar?{' '}
-              <a
-                href={linkWhatsApp(MSG_WHATS)}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="font-semibold text-brand-300 underline underline-offset-4 hover:text-brand-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-400"
-              >
-                Chamar no WhatsApp
-              </a>
             </p>
           </div>
 
@@ -227,48 +222,56 @@ export const App: React.FC = () => (
             A partir daí conseguimos dizer o que a sua operação pede: capacidade, painel, porta e
             degelo. O orçamento sai do levantamento, não de tabela.
           </p>
-          <p className="mt-6 text-sm text-slate-400">
-            <a
-              href={linkWhatsApp(MSG_WHATS)}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="font-semibold text-brand-300 underline underline-offset-4 hover:text-brand-200"
-            >
-              WhatsApp
-            </a>
-            <span className="px-3 text-slate-600">ou</span>
-            <a
-              href={`tel:${TELEFONE}`}
-              className="font-semibold text-brand-300 underline underline-offset-4 hover:text-brand-200"
-            >
-              (44) 99936-8420
-            </a>
+          <p className="mt-6 text-sm text-slate-500">
+            Levantamento sem custo e sem compromisso.
           </p>
         </div>
         <Formulario id="orcamento-fim" variante="hero" />
       </div>
     </section>
 
-    <footer className="bg-slate-950 px-5 pb-24 pt-2 text-xs text-slate-600 sm:px-8 sm:pb-10">
-      <p className="mx-auto max-w-6xl">Refrigóis · Refrigeração comercial · Paraná</p>
+    {/* Dados oficiais: identificam a empresa e sustentam a confianca de quem
+        vai deixar o contato. Ficam no rodape, e nao como chamada concorrente. */}
+    <footer className="border-t border-white/10 bg-slate-950 px-5 pb-24 pt-10 sm:px-8 sm:pb-12">
+      <div className="mx-auto grid max-w-6xl gap-6 text-sm text-slate-400 sm:grid-cols-2">
+        <div>
+          <p className="font-semibold text-slate-200">{EMPRESA_DADOS.razao}</p>
+          <p className="mt-2">CNPJ {EMPRESA_DADOS.cnpj}</p>
+          <p className="mt-1">{EMPRESA_DADOS.endereco}</p>
+          <p>{EMPRESA_DADOS.cidade}</p>
+        </div>
+        <div className="sm:text-right">
+          <p>
+            <a
+              href={`mailto:${EMPRESA_DADOS.email}`}
+              className="hover:text-slate-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-400"
+            >
+              {EMPRESA_DADOS.email}
+            </a>
+          </p>
+          <p className="mt-1">
+            <a
+              href={`tel:${EMPRESA_DADOS.telefoneLink}`}
+              className="hover:text-slate-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-400"
+            >
+              {EMPRESA_DADOS.telefone}
+            </a>
+          </p>
+          <p className="mt-4 text-xs text-slate-600">
+            Atendimento em todo o Paraná · Refrigeração comercial
+          </p>
+        </div>
+      </div>
     </footer>
 
     {/* Barra fixa no celular: o visitante rola bastante e o botao precisa
         estar sempre a um toque. Some no desktop, onde o formulario ja aparece. */}
-    <div className="fixed inset-x-0 bottom-0 z-50 flex gap-2 border-t border-slate-800 bg-slate-950/95 p-3 backdrop-blur sm:hidden">
+    <div className="fixed inset-x-0 bottom-0 z-50 border-t border-slate-800 bg-slate-950/95 p-3 backdrop-blur sm:hidden">
       <a
         href="#orcamento"
-        className="flex-1 rounded bg-brand-600 px-4 py-3 text-center text-sm font-bold text-white"
+        className="block rounded bg-brand-600 px-4 py-3 text-center text-sm font-bold text-white"
       >
         Pedir orçamento
-      </a>
-      <a
-        href={linkWhatsApp(MSG_WHATS)}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="rounded px-4 py-3 text-center text-sm font-bold text-brand-300 ring-1 ring-brand-500/40"
-      >
-        WhatsApp
       </a>
     </div>
   </div>
