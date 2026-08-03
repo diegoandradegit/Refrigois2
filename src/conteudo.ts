@@ -216,21 +216,50 @@ export const FAQ = [
 ];
 
 /**
- * Bloco sobre a empresa. Em servico tecnico o comprador quer saber com quem
- * vai falar antes de mandar o contato, e a foto de quem responde faz mais por
- * isso do que qualquer adjetivo.
+ * Bloco sobre a empresa.
+ *
+ * O foco e a Refrigois, e nao uma pessoa: quem compra camara fria de R$ 30 mil
+ * precisa acreditar na estrutura que vai fabricar, instalar e assistir depois.
+ * O fundador entra como assinatura no final — da rosto a empresa sem reduzir
+ * uma operacao inteira a um nome so.
  */
 export const EMPRESA = {
-  nome: 'Robert Góis',
-  papel: 'Fundador da Refrigóis',
+  titulo: 'Sobre a Refrigóis',
   foto: '/images/sobre/robert-escritorio.webp',
   paragrafos: [
-    'São 15 anos de refrigeração comercial atendendo açougues, mercados, padarias, restaurantes e distribuidoras em todo o Paraná.',
-    'Cada projeto passa pelas mãos de quem responde por ele. Você fala com quem dimensiona, acompanha a obra e volta se precisar de manutenção anos depois.',
+    'A Refrigóis é uma empresa de refrigeração comercial com 15 anos de estrada, atendendo açougues, mercados, padarias, restaurantes, distribuidoras e indústrias em todo o Paraná.',
+    'Fabricamos no nosso próprio galpão e instalamos com equipe própria. Projeto, produção, montagem e assistência ficam dentro de casa, então não existe terceiro no meio para empurrar responsabilidade quando algo precisa de ajuste.',
+    'É o que fazemos desde o primeiro dia. Não é uma linha a mais dentro de outra atividade.',
   ],
+  assinatura: {
+    nome: 'Robert Góis',
+    papel: 'Fundador da Refrigóis',
+  },
   numeros: [
     { valor: '15', rotulo: 'anos de refrigeração comercial' },
     { valor: 'PR', rotulo: 'atendimento em todo o estado' },
     { valor: '12', rotulo: 'meses de garantia na instalação' },
   ],
 } as const;
+
+/**
+ * Faixa que corre com os segmentos atendidos.
+ *
+ * Nao e enfeite: quem chega buscando "camara fria para conveniencia" precisa
+ * ver a palavra dele na tela. A faixa cobre a categoria inteira sem ocupar uma
+ * secao, e o movimento tira o ar parado da pagina.
+ */
+export const SEGMENTOS_FAIXA = [
+  'Mercado',
+  'Padaria',
+  'Açougue',
+  'Conveniência',
+  'Restaurante',
+  'Distribuidora',
+  'Choperia',
+  'Hortifrúti',
+  'Confeitaria',
+  'Farmácia',
+  'Sorveteria',
+  'Indústria',
+];

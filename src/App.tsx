@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Formulario } from './Formulario';
 import { ModalOrcamento } from './ModalOrcamento';
+import { FaixaSegmentos, Revelar } from './Efeitos';
 import {
   APLICACOES,
   DIFERENCIAIS,
@@ -10,6 +11,7 @@ import {
   ETAPAS,
   FAQ,
   OBRAS,
+  SEGMENTOS_FAIXA,
   SELOS,
 } from './conteudo';
 
@@ -174,6 +176,8 @@ export const App: React.FC = () => {
         </div>
       </header>
 
+      <FaixaSegmentos itens={SEGMENTOS_FAIXA} />
+
       {/* ── Prova: obra real, com o segmento no titulo ───────────────────── */}
       <Secao>
         <Titulo>Câmaras que já entregamos</Titulo>
@@ -182,14 +186,16 @@ export const App: React.FC = () => {
         </p>
 
         <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {OBRAS.map((obra) => (
-            <figure key={obra.imagem}>
+          {OBRAS.map((obra, i) => (
+            <Revelar key={obra.imagem} atraso={(i % 3) * 0.08}>
+            <figure>
               <Foto nome={obra.imagem} alt={obra.alt} className="aspect-[4/3] w-full object-cover" />
               <figcaption className="mt-3">
                 <p className="font-semibold text-slate-900">{obra.titulo}</p>
                 <p className="mt-0.5 text-sm leading-relaxed text-slate-600">{obra.linha}</p>
               </figcaption>
             </figure>
+            </Revelar>
           ))}
         </div>
 
@@ -212,11 +218,13 @@ export const App: React.FC = () => {
         </div>
 
         <dl className="mt-10 max-w-3xl divide-y divide-white/10 border-y border-white/10">
-          {ERROS.map((item) => (
-            <div key={item.titulo} className="py-6">
+          {ERROS.map((item, i) => (
+            <Revelar key={item.titulo} atraso={i * 0.08} className="py-6">
+            <div>
               <dt className="text-lg font-semibold text-white">{item.titulo}</dt>
               <dd className="mt-2 leading-relaxed text-slate-400">{item.texto}</dd>
             </div>
+            </Revelar>
           ))}
         </dl>
 
@@ -231,11 +239,13 @@ export const App: React.FC = () => {
       <Secao>
         <Titulo>Por que fechar com a Refrigóis</Titulo>
         <div className="mt-8 grid gap-x-10 gap-y-7 sm:grid-cols-2 lg:grid-cols-3">
-          {DIFERENCIAIS.map((d) => (
-            <div key={d.titulo}>
+          {DIFERENCIAIS.map((d, i) => (
+            <Revelar key={d.titulo} atraso={(i % 3) * 0.08}>
+            <div>
               <p className="font-semibold text-slate-900">{d.titulo}</p>
               <p className="mt-1.5 text-sm leading-relaxed text-slate-600">{d.texto}</p>
             </div>
+            </Revelar>
           ))}
         </div>
 
@@ -245,26 +255,30 @@ export const App: React.FC = () => {
         />
       </Secao>
 
-      {/* ── Quem atende: rosto e números antes de a pessoa deixar o contato ── */}
+      {/* ── A empresa. O foco e a estrutura; o fundador assina no final. ── */}
       <Secao className="bg-slate-50">
-        <div className="grid gap-10 md:grid-cols-[minmax(0,280px)_1fr] md:items-start md:gap-14">
+        <div className="grid gap-8 md:grid-cols-[minmax(0,340px)_1fr] md:items-start md:gap-14">
+          {/* No celular a foto ocupa a largura toda: limitada a 340px ela
+              deixava uma faixa de fundo vazia ao lado, e a imagem aparecia
+              menor do que o espaco disponivel. */}
           <img
             src={EMPRESA.foto}
-            alt={`${EMPRESA.nome}, ${EMPRESA.papel}`}
+            alt="Estrutura de atendimento da Refrigóis"
             loading="lazy"
             decoding="async"
-            className="w-full max-w-[280px] object-cover"
+            className="aspect-[4/3] w-full rounded-lg object-cover md:aspect-auto md:max-w-[340px]"
           />
-          <div>
-            <Titulo>Quem vai atender você</Titulo>
+          <Revelar>
+            <Titulo>{EMPRESA.titulo}</Titulo>
             {EMPRESA.paragrafos.map((p) => (
               <p key={p} className="mt-4 max-w-xl leading-relaxed text-slate-600">
                 {p}
               </p>
             ))}
-            <p className="mt-5 font-semibold">
-              {EMPRESA.nome}
-              <span className="ml-2 font-normal text-slate-500">{EMPRESA.papel}</span>
+
+            <p className="mt-6 text-sm">
+              <span className="font-semibold text-slate-900">{EMPRESA.assinatura.nome}</span>
+              <span className="ml-2 text-slate-500">{EMPRESA.assinatura.papel}</span>
             </p>
 
             <dl className="mt-8 flex flex-wrap gap-x-10 gap-y-5 border-t border-slate-200 pt-6">
@@ -275,7 +289,7 @@ export const App: React.FC = () => {
                 </div>
               ))}
             </dl>
-          </div>
+          </Revelar>
         </div>
       </Secao>
 
@@ -289,13 +303,15 @@ export const App: React.FC = () => {
 
         <ol className="mt-9 grid gap-7 sm:grid-cols-2 lg:grid-cols-3">
           {ETAPAS.map((etapa, i) => (
-            <li key={etapa.titulo} className="border-t-2 border-brand-500 pt-4">
+            <Revelar key={etapa.titulo} atraso={(i % 3) * 0.08}>
+            <li className="border-t-2 border-brand-500 pt-4">
               <span aria-hidden="true" className="text-sm font-bold text-brand-600">
                 {String(i + 1).padStart(2, '0')}
               </span>
               <h3 className="mt-1 font-semibold">{etapa.titulo}</h3>
               <p className="mt-1.5 text-sm leading-relaxed text-slate-600">{etapa.texto}</p>
             </li>
+            </Revelar>
           ))}
         </ol>
 

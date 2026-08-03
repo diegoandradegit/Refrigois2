@@ -13,9 +13,22 @@ export default {
         },
       },
       keyframes: {
-        'fade-in-up': { '0%': { opacity: '0', transform: 'translateY(16px)' }, '100%': { opacity: '1', transform: 'translateY(0)' } },
+        'fade-in-up': {
+          '0%': { opacity: '0', transform: 'translateY(16px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
+        },
+        // A faixa anda metade da propria largura. Como a lista e duplicada,
+        // ao chegar em -50% o ponto de partida e identico ao atual, e o
+        // recomeco nao aparece: o movimento parece continuo.
+        correr: {
+          '0%': { transform: 'translateX(0)' },
+          '100%': { transform: 'translateX(-50%)' },
+        },
       },
-      animation: { 'fade-in-up': 'fade-in-up 0.6s ease-out both' },
+      animation: {
+        'fade-in-up': 'fade-in-up 0.6s ease-out both',
+        correr: 'correr 32s linear infinite',
+      },
     },
   },
   plugins: [],
