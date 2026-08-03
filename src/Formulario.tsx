@@ -4,9 +4,14 @@ import { EMPRESA_DADOS, ENDPOINT_LEAD, SEGMENTOS } from './conteudo';
 /**
  * Formulario da landing.
  *
- * Cinco campos: menos que isso traz lead sem qualificacao e queima tempo
- * comercial; mais que isso derruba a conversao no celular. E-mail fica de
- * fora de proposito — em comercio local, WhatsApp responde e e-mail nao.
+ * Campos obrigatorios: nome, sobrenome, telefone, e-mail e segmento. Cidade e
+ * o que sera armazenado ficam opcionais, para nao alongar o preenchimento no
+ * celular, mas quando vem ja adiantam o levantamento.
+ *
+ * Vale saber ao ler os numeros da campanha: cada campo obrigatorio derruba um
+ * pouco a taxa de preenchimento. O ganho e do outro lado — lead com segmento e
+ * e-mail chega qualificado e permite retomada depois, o que compensa quando o
+ * ticket e alto.
  */
 
 type Estado = 'parado' | 'enviando' | 'enviado' | 'erro';
@@ -46,7 +51,9 @@ export const Formulario: React.FC<Props> = ({ variante = 'hero', id }) => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           nome: dados.get('nome'),
+          sobrenome: dados.get('sobrenome'),
           contato: dados.get('contato'),
+          email: dados.get('email'),
           cidade: dados.get('cidade'),
           tipo_negocio: dados.get('tipo_negocio'),
           necessidade: dados.get('necessidade'),
@@ -124,16 +131,36 @@ export const Formulario: React.FC<Props> = ({ variante = 'hero', id }) => {
       </p>
 
       <div className="grid gap-4">
-        <div>
-          <label className={rotulo} htmlFor={`${id}-nome`}>
-            Nome
-          </label>
-          <input id={`${id}-nome`} name="nome" required autoComplete="name" className={campo} />
+        <div className="grid grid-cols-2 gap-3">
+          <div>
+            <label className={rotulo} htmlFor={`${id}-nome`}>
+              Nome
+            </label>
+            <input
+              id={`${id}-nome`}
+              name="nome"
+              required
+              autoComplete="given-name"
+              className={campo}
+            />
+          </div>
+          <div>
+            <label className={rotulo} htmlFor={`${id}-sobrenome`}>
+              Sobrenome
+            </label>
+            <input
+              id={`${id}-sobrenome`}
+              name="sobrenome"
+              required
+              autoComplete="family-name"
+              className={campo}
+            />
+          </div>
         </div>
 
         <div>
           <label className={rotulo} htmlFor={`${id}-contato`}>
-            WhatsApp
+            Telefone / WhatsApp
           </label>
           <input
             id={`${id}-contato`}
@@ -147,7 +174,39 @@ export const Formulario: React.FC<Props> = ({ variante = 'hero', id }) => {
           />
         </div>
 
+        <div>
+          <label className={rotulo} htmlFor={`${id}-email`}>
+            E-mail
+          </label>
+          <input
+            id={`${id}-email`}
+            name="email"
+            required
+            type="email"
+            inputMode="email"
+            autoComplete="email"
+            placeholder="nome@empresa.com.br"
+            className={campo}
+          />
+        </div>
+
         <div className="grid grid-cols-2 gap-3">
+          <div>
+            <label className={rotulo} htmlFor={`${id}-tipo`}>
+              Segmento
+            </label>
+            <select id={`${id}-tipo`} name="tipo_negocio" required defaultValue="" className={campo}>
+              <option value="" disabled>
+                Selecione
+              </option>
+              {SEGMENTOS.map((nome) => (
+                <option key={nome} value={nome}>
+                  {nome}
+                </option>
+              ))}
+              <option value="Outro">Outro</option>
+            </select>
+          </div>
           <div>
             <label className={rotulo} htmlFor={`${id}-cidade`}>
               Cidade
@@ -158,20 +217,6 @@ export const Formulario: React.FC<Props> = ({ variante = 'hero', id }) => {
               autoComplete="address-level2"
               className={campo}
             />
-          </div>
-          <div>
-            <label className={rotulo} htmlFor={`${id}-tipo`}>
-              Seu negócio
-            </label>
-            <select id={`${id}-tipo`} name="tipo_negocio" defaultValue="" className={campo}>
-              <option value="">Selecione</option>
-              {SEGMENTOS.map((nome) => (
-                <option key={nome} value={nome}>
-                  {nome}
-                </option>
-              ))}
-              <option value="Outro">Outro</option>
-            </select>
           </div>
         </div>
 
