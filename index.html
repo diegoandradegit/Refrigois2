@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#020617" />
+
+    <title>Câmara Fria em Maringá e Paraná | Projeto, Fabricação e Instalação — Refrigóis</title>
+    <meta
+      name="description"
+      content="Câmara fria e câmara frigorífica para açougue, supermercado, restaurante, padaria, distribuidora e farmácia. Projeto sob medida, fabricação própria e instalação em Maringá e todo o Paraná. Peça seu orçamento."
+    />
+    <link rel="canonical" href="https://refrigois.com.br/camara-fria/" />
+
+    <!-- Pagina de anuncio: nao deve competir com o site principal na busca
+         organica nem diluir a autoridade das paginas de servico ja indexadas. -->
+    <meta name="robots" content="noindex, follow" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="pt_BR" />
+    <meta property="og:site_name" content="Refrigóis" />
+    <meta property="og:title" content="Câmara Fria em Maringá e Paraná — Refrigóis" />
+    <meta
+      property="og:description"
+      content="Projeto, fabricação e instalação de câmara fria. Dimensionada para o seu produto, o seu movimento e o espaço que você tem."
+    />
+    <meta property="og:image" content="https://refrigois.com.br/images/camara-frigorifica-industrial-1280.webp" />
+
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+    <!-- Fonte propria: ver o @font-face em src/index.css -->
+    <link rel="preload" as="font" type="font/woff2" href="/fonts/inter-latin-var.woff2" crossorigin />
+
+    <!-- Imagem do topo: e o LCP da pagina, entao entra em prioridade alta -->
+    <link
+      rel="preload"
+      as="image"
+      type="image/webp"
+      href="/images/camara-frigorifica-industrial-1280.webp"
+      imagesrcset="/images/camara-frigorifica-industrial-640.webp 640w, /images/camara-frigorifica-industrial-1280.webp 1280w"
+      imagesizes="100vw"
+      fetchpriority="high"
+    />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Service",
+        "serviceType": "Instalação e fabricação de câmara fria",
+        "provider": {
+          "@type": "LocalBusiness",
+          "name": "Refrigóis",
+          "telephone": "+55 44 99936-8420",
+          "areaServed": { "@type": "State", "name": "Paraná" },
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Maringá",
+            "addressRegion": "PR",
+            "addressCountry": "BR"
+          }
+        },
+        "areaServed": { "@type": "State", "name": "Paraná" }
+      }
+    </script>
+
+    <script>
+      // O gtag.js pesa cerca de 160 KB. Numa landing de anuncio, cada decimo
+      // de segundo no carregamento e lance pago que nao vira lead — entao ele
+      // so entra depois que a pagina termina, ou na primeira interacao.
+      // As chamadas abaixo ficam na fila do dataLayer e sao processadas quando
+      // o script chega, entao nenhuma conversao se perde.
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { dataLayer.push(arguments); }
+      gtag('js', new Date());
+      gtag('config', 'G-ME19B7BEPB');
+
+      (function () {
+        var carregado = false;
+        function carregarGA() {
+          if (carregado) return;
+          carregado = true;
+          var s = document.createElement('script');
+          s.async = true;
+          s.src = 'https://www.googletagmanager.com/gtag/js?id=G-ME19B7BEPB';
+          document.head.appendChild(s);
+        }
+        ['pointerdown', 'keydown', 'scroll'].forEach(function (evento) {
+          window.addEventListener(evento, carregarGA, { once: true, passive: true });
+        });
+        function aposCarregar() {
+          if (window.requestIdleCallback) requestIdleCallback(carregarGA, { timeout: 2000 });
+          else setTimeout(carregarGA, 1000);
+        }
+        if (document.readyState === 'complete') aposCarregar();
+        else window.addEventListener('load', aposCarregar);
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
