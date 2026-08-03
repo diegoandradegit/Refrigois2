@@ -104,19 +104,23 @@ export const App: React.FC = () => {
     <div className="bg-white font-sans text-slate-900 antialiased">
       {/* ── Topo: o que é, para quem, por que nós, e como pedir ─────────── */}
       <header className="relative isolate flex min-h-[640px] items-center overflow-hidden bg-slate-950 lg:min-h-[720px]">
+        {/* Mesma arte da hero do site principal: quem clica no anuncio e depois
+            procura a empresa no Google encontra a mesma imagem, e nao parece
+            que caiu em outro lugar. O .jpg fica so de reserva para navegador
+            sem WebP; o resto baixa a versao do tamanho da tela. */}
         <picture className="absolute inset-0 -z-10 block h-full w-full">
           <source
             type="image/webp"
-            srcSet="/images/camara-frigorifica-industrial-640.webp 640w, /images/camara-frigorifica-industrial-1280.webp 1280w"
+            srcSet="/images/hero-640.webp 640w, /images/hero-1280.webp 1280w, /images/hero-1920.webp 1920w"
             sizes="100vw"
           />
           <img
-            src="/images/camara-frigorifica-industrial-1280.webp"
+            src="/images/hero.jpg"
             alt=""
-            width={1280}
-            height={853}
+            width={1600}
+            height={854}
             fetchPriority="high"
-            className="h-full w-full object-cover"
+            className="h-full w-full object-cover object-[68%_center] sm:object-center"
           />
         </picture>
         <div className="absolute inset-0 -z-10 bg-gradient-to-r from-slate-950 via-slate-950/85 to-slate-950/40 lg:via-slate-950/70 lg:to-slate-950/20" />
