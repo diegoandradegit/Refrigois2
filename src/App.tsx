@@ -307,40 +307,57 @@ export const App: React.FC = () => {
         />
       </Secao>
 
-      {/* ── A empresa. O foco e a estrutura; o fundador assina no final. ── */}
+      {/* ── A empresa. Mesma copy do site principal, para quem pesquisar a
+          Refrigois no Google encontrar a mesma historia. ───────────────── */}
       <Secao className="bg-slate-50">
-        <div className="grid gap-8 md:grid-cols-[minmax(0,340px)_1fr] md:items-start md:gap-14">
-          {/* No celular a foto ocupa a largura toda: limitada a 340px ela
-              deixava uma faixa de fundo vazia ao lado, e a imagem aparecia
-              menor do que o espaco disponivel. */}
-          <img
-            src={EMPRESA.foto}
-            alt="Estrutura de atendimento da Refrigóis"
-            loading="lazy"
-            decoding="async"
-            className="aspect-[4/3] w-full rounded-lg object-cover md:aspect-auto md:max-w-[340px]"
-          />
+        <div className="grid gap-10 lg:grid-cols-2 lg:items-center lg:gap-16">
+          <div className="relative">
+            <img
+              src={EMPRESA.foto}
+              alt={EMPRESA.fotoAlt}
+              width={1100}
+              height={825}
+              loading="lazy"
+              decoding="async"
+              className="aspect-[4/3] w-full rounded-2xl object-cover shadow-2xl"
+            />
+            {/* Selo de tempo de casa, como no site principal: e o numero que a
+                pessoa guarda depois de fechar a pagina. */}
+            <div className="absolute -bottom-5 right-4 flex items-center gap-3 rounded-2xl bg-white px-5 py-3 shadow-xl ring-1 ring-slate-100">
+              <span className="text-4xl font-extrabold leading-none text-brand-600">15</span>
+              <span className="text-[11px] font-bold uppercase leading-tight tracking-wide text-slate-700">
+                anos de
+                <br />
+                experiência
+              </span>
+            </div>
+          </div>
+
           <Revelar>
+            <p className="mb-3 text-xs font-bold uppercase tracking-widest text-brand-600">
+              {EMPRESA.chapeu}
+            </p>
             <Titulo>{EMPRESA.titulo}</Titulo>
+
             {EMPRESA.paragrafos.map((p) => (
-              <p key={p} className="mt-4 max-w-xl leading-relaxed text-slate-600">
+              <p key={p} className="mt-5 leading-relaxed text-slate-600">
                 {p}
               </p>
             ))}
 
-            <p className="mt-6 text-sm">
-              <span className="font-semibold text-slate-900">{EMPRESA.assinatura.nome}</span>
-              <span className="ml-2 text-slate-500">{EMPRESA.assinatura.papel}</span>
-            </p>
+            <div className="mt-7">
+              <p className="text-lg font-bold text-slate-900">{EMPRESA.assinatura.nome}</p>
+              <p className="text-sm text-slate-500">{EMPRESA.assinatura.papel}</p>
+            </div>
 
-            <dl className="mt-8 flex flex-wrap gap-x-10 gap-y-5 border-t border-slate-200 pt-6">
-              {EMPRESA.numeros.map((n) => (
-                <div key={n.rotulo}>
-                  <dt className="text-3xl font-bold text-brand-600">{n.valor}</dt>
-                  <dd className="mt-0.5 max-w-[10rem] text-sm text-slate-600">{n.rotulo}</dd>
+            <div className="mt-8 grid gap-3 sm:grid-cols-3">
+              {EMPRESA.valores.map((v) => (
+                <div key={v.titulo} className="rounded-xl border border-slate-200 bg-white p-4">
+                  <h4 className="text-sm font-bold text-slate-900">{v.titulo}</h4>
+                  <p className="mt-1 text-xs leading-snug text-slate-500">{v.texto}</p>
                 </div>
               ))}
-            </dl>
+            </div>
           </Revelar>
         </div>
       </Secao>

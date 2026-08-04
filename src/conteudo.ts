@@ -250,27 +250,29 @@ export const FAQ = [
 /**
  * Bloco sobre a empresa.
  *
- * O foco e a Refrigois, e nao uma pessoa: quem compra camara fria de R$ 30 mil
- * precisa acreditar na estrutura que vai fabricar, instalar e assistir depois.
- * O fundador entra como assinatura no final — da rosto a empresa sem reduzir
- * uma operacao inteira a um nome so.
+ * Mesma copy do site principal, de proposito: quem ve o anuncio, pesquisa a
+ * Refrigois no Google e cai no site institucional precisa encontrar a mesma
+ * historia, com as mesmas palavras. Versao diferente do mesmo assunto levanta
+ * duvida justamente em quem estava conferindo antes de fechar.
  */
 export const EMPRESA = {
-  titulo: 'Sobre a Refrigóis',
+  chapeu: 'Quem faz a Refrigóis',
+  titulo: '15 anos de experiência em refrigeração comercial',
   foto: '/images/sobre/robert-escritorio.webp',
+  fotoAlt: 'Robert Góis, fundador da Refrigóis, no escritório da empresa',
   paragrafos: [
-    'A Refrigóis é uma empresa de refrigeração comercial com 15 anos de estrada, atendendo açougues, mercados, padarias, restaurantes, distribuidoras e indústrias em todo o Paraná.',
-    'Fabricamos no nosso próprio galpão e instalamos com equipe própria. Projeto, produção, montagem e assistência ficam dentro de casa, então não existe terceiro no meio para empurrar responsabilidade quando algo precisa de ajuste.',
-    'É o que fazemos desde o primeiro dia. Não é uma linha a mais dentro de outra atividade.',
+    'À frente da Refrigóis está Robert Góis, profissional com 15 anos de experiência em refrigeração comercial. Ao longo desse tempo, atendendo açougues, mercados, padarias, restaurantes e distribuidoras, ele consolidou o padrão que define a empresa: rigor técnico, transparência e compromissos cumpridos.',
+    'Honestidade, respeito e dedicação orientam cada atendimento, do primeiro orçamento à manutenção anos depois. Homem de família e de fé, Robert leva esses valores para a gestão e conduz cada projeto pessoalmente, por entender que a confiança é a base de toda relação comercial duradoura.',
+    'Ao falar com a Refrigóis, você trata diretamente com quem domina o assunto e assume a responsabilidade pelo resultado. É essa seriedade que sustenta a fidelidade e a indicação dos clientes.',
   ],
   assinatura: {
     nome: 'Robert Góis',
-    papel: 'Fundador da Refrigóis',
+    papel: 'Fundador · Refrigóis Refrigeração Comercial',
   },
-  numeros: [
-    { valor: '15', rotulo: 'anos de refrigeração comercial' },
-    { valor: 'PR', rotulo: 'atendimento em todo o estado' },
-    { valor: '12', rotulo: 'meses de garantia na instalação' },
+  valores: [
+    { titulo: 'Honestidade', texto: 'O combinado é cumprido, do prazo ao orçamento.' },
+    { titulo: 'Respeito', texto: 'Cada cliente atendido conforme a operação exige.' },
+    { titulo: 'Dedicação', texto: 'Presença real, do projeto à manutenção.' },
   ],
 } as const;
 
