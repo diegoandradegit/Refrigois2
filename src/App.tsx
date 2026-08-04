@@ -134,7 +134,7 @@ export const App: React.FC = () => {
               width e height batem com a proporcao real do arquivo, para o
               navegador reservar o espaco certo e o topo nao pular ao carregar. */}
           <img
-            src="/logo.png"
+            src="/logo-v2.png"
             alt="Refrigóis Refrigeração Comercial"
             width={169}
             height={45}
