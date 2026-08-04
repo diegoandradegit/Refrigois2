@@ -195,7 +195,11 @@ export const FAQ = [
   },
   {
     p: 'Vocês fazem projeto personalizado ou é tamanho de catálogo?',
-    r: 'Personalizado. A câmara é modular e montada na medida do seu ponto: definimos capacidade, espessura de painel, tipo de porta e degelo a partir do que você armazena e de quanto espaço existe.',
+    r: 'Personalizado. A câmara é montada em painéis, na medida do seu ponto: definimos capacidade, espessura de painel, tipo de porta e degelo a partir do que você armazena e de quanto espaço existe. Isso vale para qualquer tipo, da resfriada de açougue à expositora com portas de vidro.',
+  },
+  {
+    p: 'Que tipos de câmara fria vocês fabricam?',
+    r: 'Resfriadas, de congelados, modulares e desmontáveis, expositoras com portas de vidro (walk-in cooler), câmaras de bebidas e chopp (beer cave) e frigoríficas industriais. O tipo é definido no levantamento, a partir do que você armazena e do espaço disponível.',
   },
   {
     p: 'A instalação é feita por vocês mesmos?',
@@ -249,6 +253,41 @@ export const EMPRESA = {
  * ver a palavra dele na tela. A faixa cobre a categoria inteira sem ocupar uma
  * secao, e o movimento tira o ar parado da pagina.
  */
+/**
+ * Tipos de camara fria.
+ *
+ * Camara fria nao e uma coisa so, e cada tipo tem um nome proprio pelo qual as
+ * pessoas buscam — inclusive os em ingles, que o mercado usa no dia a dia. Quem
+ * procura "beer cave" ou "walk-in cooler" precisa achar esse termo na pagina,
+ * senao acha que a empresa nao faz aquilo.
+ */
+export const TIPOS = [
+  {
+    nome: 'Câmara resfriada',
+    linha: 'De 0 °C a 5 °C, para carnes frescas, laticínios, hortifrúti e bebidas.',
+  },
+  {
+    nome: 'Câmara de congelados',
+    linha: 'De −18 °C a −25 °C, para estoque congelado e ilhas de apoio.',
+  },
+  {
+    nome: 'Câmara expositora com portas de vidro',
+    linha: 'Conhecida como walk-in cooler: exposição e autosserviço sem abrir a câmara inteira.',
+  },
+  {
+    nome: 'Câmara para bebidas e chopp',
+    linha: 'A beer cave de bares, choperias, adegas e conveniências, com barril na temperatura certa.',
+  },
+  {
+    nome: 'Câmara modular e desmontável',
+    linha: 'Montada em painéis encaixados: pode ser ampliada ou remontada em outro ponto.',
+  },
+  {
+    nome: 'Câmara frigorífica industrial',
+    linha: 'Grande volume, para indústria, logística e distribuição.',
+  },
+];
+
 export const SEGMENTOS_FAIXA = [
   'Mercado',
   'Padaria',

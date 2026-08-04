@@ -13,6 +13,7 @@ import {
   OBRAS,
   SEGMENTOS_FAIXA,
   SELOS,
+  TIPOS,
 } from './conteudo';
 
 /**
@@ -141,9 +142,9 @@ export const App: React.FC = () => {
               </h1>
 
               <p className="mt-5 max-w-lg text-base leading-relaxed text-slate-200 drop-shadow-md sm:text-lg">
-                Fabricamos e instalamos câmaras frias e frigoríficas para açougues, supermercados,
-                restaurantes, padarias, distribuidoras e indústrias. Uma só empresa projeta,
-                fabrica, instala e assiste depois.
+                Resfriadas, de congelados, expositoras com portas de vidro, de bebidas e chopp ou
+                frigoríficas industriais. Uma só empresa projeta, fabrica, instala e assiste
+                depois, em todo o Paraná.
               </p>
 
               {/* Os quatro selos respondem "por que a Refrigóis" antes de a
@@ -207,6 +208,32 @@ export const App: React.FC = () => {
           aoClicar={abrir}
           texto="Conte o que você precisa armazenar e dizemos o que a sua operação pede."
         />
+      </Secao>
+
+      {/* ── Tipos: camara fria nao e uma coisa so, e cada tipo tem um nome
+          proprio pelo qual as pessoas buscam. ─────────────────────────── */}
+      <Secao className="bg-slate-50">
+        <div className="max-w-3xl">
+          <Titulo>Que tipo de câmara você precisa?</Titulo>
+          <p className="mt-3 text-slate-600">
+            Fabricamos todos eles. O que muda de um para o outro é a temperatura de trabalho, a
+            espessura do painel, o tipo de porta e o degelo — e é isso que o levantamento define.
+          </p>
+
+          <dl className="mt-8 divide-y divide-slate-200 border-y border-slate-200">
+            {TIPOS.map((tipo, i) => (
+              <Revelar key={tipo.nome} atraso={(i % 3) * 0.06} className="py-4">
+                <dt className="font-semibold text-slate-900">{tipo.nome}</dt>
+                <dd className="mt-1 text-sm leading-relaxed text-slate-600">{tipo.linha}</dd>
+              </Revelar>
+            ))}
+          </dl>
+
+          <ChamadaFinalDeBloco
+            aoClicar={abrir}
+            texto="Não sabe qual é o seu caso? Descrevemos junto com você no levantamento."
+          />
+        </div>
       </Secao>
 
       {/* ── O custo de errar: transforma "quanto custa" em "quanto custa
