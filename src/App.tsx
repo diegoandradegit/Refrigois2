@@ -48,24 +48,54 @@ const Titulo: React.FC<{ children: React.ReactNode; claro?: boolean }> = ({ chil
   </h2>
 );
 
-/** Botao de conversao. Existe um so, para nenhuma CTA sair do padrao. */
+/**
+ * Botao de conversao. Existe um so, para nenhuma CTA sair do padrao.
+ *
+ * O efeito nao e enfeite: numa pagina que vive de trafego pago, o botao precisa
+ * ser a coisa que o olho encontra ao parar de rolar. Sao dois movimentos, os
+ * dois ligados ao ramo:
+ *
+ * - Um reflexo que atravessa o botao, como a luz que passa na porta de vidro de
+ *   um expositor. Fica parado a maior parte do ciclo e cruza rapido — e o
+ *   movimento breve que puxa o olho; movimento continuo vira ruido e a pessoa
+ *   para de enxergar.
+ * - Um halo azul-gelo que abre e some ao redor, so no botao principal.
+ *
+ * Quem pediu menos movimento no aparelho nao recebe nenhum dos dois
+ * (motion-reduce), e o botao continua funcionando igual.
+ */
 const BotaoOrcamento: React.FC<{
   aoClicar: () => void;
   children?: React.ReactNode;
   claro?: boolean;
   largo?: boolean;
-}> = ({ aoClicar, children = 'Solicitar orçamento', claro, largo }) => (
+  /** Halo pulsante. Reservado ao botao principal, para nao competirem entre si. */
+  destaque?: boolean;
+}> = ({ aoClicar, children = 'Solicitar orçamento', claro, largo, destaque }) => (
   <button
     onClick={aoClicar}
-    className={`rounded-lg px-7 py-3.5 text-base font-bold transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-400 ${
+    className={`group relative overflow-hidden rounded-lg px-7 py-3.5 text-base font-bold transition duration-300 hover:-translate-y-0.5 hover:shadow-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-400 active:translate-y-0 ${
       largo ? 'w-full sm:w-auto' : ''
-    } ${
+    } ${destaque ? 'animate-halo motion-reduce:animate-none' : ''} ${
       claro
-        ? 'bg-white text-slate-900 hover:bg-slate-100'
-        : 'bg-brand-600 text-white hover:bg-brand-700'
+        ? 'bg-white text-slate-900 hover:bg-slate-100 hover:shadow-slate-900/20'
+        : 'bg-brand-600 text-white hover:bg-brand-500 hover:shadow-brand-600/40'
     }`}
   >
-    {children}
+    {/* O reflexo. aria-hidden e pointer-events-none: e decoracao, nao deve
+        aparecer para leitor de tela nem roubar o clique. */}
+    {/* O reflexo fica acima do fundo do botao e abaixo do texto. Nada de
+        z-index negativo: com um contexto de empilhamento no botao, ele
+        passaria a ser pintado atras do proprio fundo e sumiria. */}
+    <span
+      aria-hidden="true"
+      className={`pointer-events-none absolute inset-y-0 left-0 w-1/3 animate-brilho motion-reduce:hidden ${
+        claro
+          ? 'bg-gradient-to-r from-transparent via-slate-900/10 to-transparent'
+          : 'bg-gradient-to-r from-transparent via-white/40 to-transparent'
+      }`}
+    />
+    <span className="relative">{children}</span>
   </button>
 );
 
@@ -174,7 +204,7 @@ export const App: React.FC = () => {
               {/* No celular o formulario vira botao: manter as duas colunas
                   empilhadas empurrava a prova e os selos para fora da tela. */}
               <div className="mt-9 lg:hidden">
-                <BotaoOrcamento aoClicar={abrir} largo>
+                <BotaoOrcamento aoClicar={abrir} largo destaque>
                   Solicitar orçamento
                 </BotaoOrcamento>
                 <p className="mt-3 text-sm text-slate-400">
