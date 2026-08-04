@@ -12,14 +12,14 @@
     />
     <link rel="canonical" href="https://camara-fria.refrigois.com.br/" />
 
-    <!-- A pagina passa a ser indexavel: em subdominio proprio ela disputa o
-         termo "camara fria" sem tomar o lugar das paginas de servico do site
-         principal na mesma URL.
-         max-snippet e max-image-preview soltos: motores de busca e assistentes
-         de IA citam trechos maiores, e trecho maior citado e trecho que traz
-         mais contexto da resposta. -->
-    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
-    <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large" />
+    <!-- Fora da busca organica, por decisao: a pagina vive de trafego pago.
+         Isso NAO impede o Google Ads de servi-la — anuncio nao exige pagina
+         indexada — e evita que ela dispute com as paginas de servico do site
+         principal.
+         "follow" de proposito: os links da pagina continuam valendo.
+         O robots.txt segue liberando o rastreamento, porque bloquear ali
+         impediria o robo de ler justamente esta linha. -->
+    <meta name="robots" content="noindex, follow" />
     <meta name="author" content="Refrigóis Refrigeração Comercial" />
     <meta name="geo.region" content="BR-PR" />
     <meta name="geo.placename" content="Paraná" />

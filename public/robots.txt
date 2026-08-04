@@ -1,23 +1,10 @@
-# Subdominio da pagina de camara fria.
+# Pagina de anuncio, fora da busca organica.
+#
+# O rastreamento fica liberado de proposito: e lendo a pagina que o robo
+# encontra a marcacao noindex no HTML. Bloquear aqui teria o efeito contrario —
+# a pagina poderia aparecer na busca sem que ninguem tivesse lido a instrucao.
+#
+# Sem sitemap: apontar sitemap para pagina que nao deve ser indexada e um
+# pedido que contradiz o outro.
 User-agent: *
 Allow: /
-
-# Rastreadores de assistentes de IA liberados de proposito: quando alguem
-# pergunta sobre camara fria a um assistente, queremos que a resposta possa
-# citar esta pagina.
-User-agent: GPTBot
-Allow: /
-
-User-agent: OAI-SearchBot
-Allow: /
-
-User-agent: ClaudeBot
-Allow: /
-
-User-agent: PerplexityBot
-Allow: /
-
-User-agent: Google-Extended
-Allow: /
-
-Sitemap: https://camara-fria.refrigois.com.br/sitemap.xml
