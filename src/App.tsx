@@ -128,7 +128,18 @@ export const App: React.FC = () => {
         <div className="absolute inset-0 -z-10 bg-gradient-to-t from-slate-950/80 via-transparent to-slate-950/60" />
 
         <div className="mx-auto w-full max-w-6xl px-5 py-12 sm:px-8 sm:py-16">
-          <img src="/logo.png" alt="Refrigóis" width={44} height={44} className="mb-9 h-11 w-auto" />
+          {/* Logo oficial na horizontal. Sobre o fundo escuro do topo ela vai
+              em branco (brightness-0 invert), como no site principal: o azul
+              da marca some contra o slate-950.
+              width e height batem com a proporcao real do arquivo, para o
+              navegador reservar o espaco certo e o topo nao pular ao carregar. */}
+          <img
+            src="/logo.png"
+            alt="Refrigóis Refrigeração Comercial"
+            width={169}
+            height={45}
+            className="mb-9 h-10 w-auto object-contain brightness-0 invert sm:h-12"
+          />
 
           <div className="grid gap-10 lg:grid-cols-[1fr_400px] lg:gap-16">
             <div className="max-w-xl animate-fade-in-up">
