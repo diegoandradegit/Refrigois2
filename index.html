@@ -10,11 +10,19 @@
       name="description"
       content="Câmara fria resfriada, de congelados, modular, expositora com portas de vidro (walk-in cooler), de bebidas e chopp (beer cave) e frigorífica industrial. Para açougue, supermercado, restaurante, padaria, distribuidora, hortifrúti, farmácia e indústria, com fabricação própria e instalação em todo o Paraná."
     />
-    <link rel="canonical" href="https://refrigois.com.br/camara-fria/" />
+    <link rel="canonical" href="https://camara-fria.refrigois.com.br/" />
 
-    <!-- Pagina de anuncio: nao deve competir com o site principal na busca
-         organica nem diluir a autoridade das paginas de servico ja indexadas. -->
-    <meta name="robots" content="noindex, follow" />
+    <!-- A pagina passa a ser indexavel: em subdominio proprio ela disputa o
+         termo "camara fria" sem tomar o lugar das paginas de servico do site
+         principal na mesma URL.
+         max-snippet e max-image-preview soltos: motores de busca e assistentes
+         de IA citam trechos maiores, e trecho maior citado e trecho que traz
+         mais contexto da resposta. -->
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+    <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large" />
+    <meta name="author" content="Refrigóis Refrigeração Comercial" />
+    <meta name="geo.region" content="BR-PR" />
+    <meta name="geo.placename" content="Paraná" />
 
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="pt_BR" />
@@ -24,7 +32,16 @@
       property="og:description"
       content="Todos os tipos de câmara fria, sob medida para o seu espaço. Projeto, fabricação e instalação em todo o Paraná."
     />
-    <meta property="og:image" content="https://refrigois.com.br/images/camara-frigorifica-industrial-1280.webp" />
+    <meta property="og:url" content="https://camara-fria.refrigois.com.br/" />
+    <meta property="og:image" content="https://camara-fria.refrigois.com.br/og-camara-fria.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Robert Góis, fundador da Refrigóis, especialista em câmara fria no Paraná" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Câmara Fria no Paraná | Refrigóis" />
+    <meta name="twitter:description" content="Todos os tipos de câmara fria, sob medida para o seu espaço. Projeto, fabricação e instalação em todo o Paraná." />
+    <meta name="twitter:image" content="https://camara-fria.refrigois.com.br/og-camara-fria.jpg" />
 
     <link rel="icon" href="/favicon-v3.ico" sizes="any" />
     <link rel="apple-touch-icon" href="/apple-touch-icon-v3.png" />
@@ -44,28 +61,174 @@
     />
 
     <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "Service",
-        "serviceType": "Projeto, fabricação e instalação de câmara fria",
-        "provider": {
-          "@type": "LocalBusiness",
-          "name": "Refrigóis",
-          "telephone": "+55 44 99936-8420",
-          "email": "contato@refrigois.com.br",
-          "taxID": "41.179.761/0001-30",
-          "areaServed": { "@type": "State", "name": "Paraná" },
-          "address": {
-            "@type": "PostalAddress",
-            "streetAddress": "Rua Pioneira Gertrude Heck Fritzen, 5821 - Conj. João de Barro I",
-            "addressLocality": "Maringá",
-            "postalCode": "87053-124",
-            "addressRegion": "PR",
-            "addressCountry": "BR"
-          }
-        },
-        "areaServed": { "@type": "State", "name": "Paraná" }
-      }
+{
+      "@context": "https://schema.org",
+      "@graph": [
+            {
+                  "@type": "LocalBusiness",
+                  "@id": "https://camara-fria.refrigois.com.br/#refrigois",
+                  "name": "Refrigóis Refrigeração Comercial",
+                  "url": "https://camara-fria.refrigois.com.br/",
+                  "image": "https://camara-fria.refrigois.com.br/og-camara-fria.jpg",
+                  "logo": "https://camara-fria.refrigois.com.br/logo-v2.png",
+                  "telephone": "+55 44 99936-8420",
+                  "email": "contato@refrigois.com.br",
+                  "taxID": "41.179.761/0001-30",
+                  "priceRange": "$$",
+                  "foundingDate": "2011",
+                  "address": {
+                        "@type": "PostalAddress",
+                        "streetAddress": "Rua Pioneira Gertrude Heck Fritzen, 5821 - Conj. João de Barro I",
+                        "addressLocality": "Maringá",
+                        "postalCode": "87053-124",
+                        "addressRegion": "PR",
+                        "addressCountry": "BR"
+                  },
+                  "areaServed": {
+                        "@type": "State",
+                        "name": "Paraná"
+                  },
+                  "founder": {
+                        "@type": "Person",
+                        "name": "Robert Góis",
+                        "jobTitle": "Fundador"
+                  },
+                  "knowsAbout": [
+                        "câmara fria",
+                        "câmara frigorífica",
+                        "câmara resfriada",
+                        "câmara de congelados",
+                        "walk-in cooler",
+                        "beer cave",
+                        "painel isotérmico",
+                        "carga térmica",
+                        "refrigeração comercial"
+                  ]
+            },
+            {
+                  "@type": "Service",
+                  "@id": "https://camara-fria.refrigois.com.br/#servico",
+                  "serviceType": "Projeto, fabricação e instalação de câmara fria",
+                  "provider": {
+                        "@id": "https://camara-fria.refrigois.com.br/#refrigois"
+                  },
+                  "areaServed": {
+                        "@type": "State",
+                        "name": "Paraná"
+                  },
+                  "hasOfferCatalog": {
+                        "@type": "OfferCatalog",
+                        "name": "Tipos de câmara fria",
+                        "itemListElement": [
+                              {
+                                    "@type": "Offer",
+                                    "itemOffered": {
+                                          "@type": "Service",
+                                          "name": "Câmara resfriada (0 °C a 5 °C)"
+                                    }
+                              },
+                              {
+                                    "@type": "Offer",
+                                    "itemOffered": {
+                                          "@type": "Service",
+                                          "name": "Câmara de congelados (−18 °C a −25 °C)"
+                                    }
+                              },
+                              {
+                                    "@type": "Offer",
+                                    "itemOffered": {
+                                          "@type": "Service",
+                                          "name": "Câmara expositora com portas de vidro (walk-in cooler)"
+                                    }
+                              },
+                              {
+                                    "@type": "Offer",
+                                    "itemOffered": {
+                                          "@type": "Service",
+                                          "name": "Câmara de bebidas e chopp (beer cave)"
+                                    }
+                              },
+                              {
+                                    "@type": "Offer",
+                                    "itemOffered": {
+                                          "@type": "Service",
+                                          "name": "Câmara modular e desmontável"
+                                    }
+                              },
+                              {
+                                    "@type": "Offer",
+                                    "itemOffered": {
+                                          "@type": "Service",
+                                          "name": "Câmara frigorífica industrial"
+                                    }
+                              }
+                        ]
+                  }
+            },
+            {
+                  "@type": "FAQPage",
+                  "@id": "https://camara-fria.refrigois.com.br/#faq",
+                  "mainEntity": [
+                        {
+                              "@type": "Question",
+                              "name": "Vocês atendem a minha cidade?",
+                              "acceptedAnswer": {
+                                    "@type": "Answer",
+                                    "text": "Atendemos todo o Paraná. Já executamos obras em Guaíra, Cascavel, Londrina e Foz do Iguaçu, então distância não é impedimento para projeto agendado."
+                              }
+                        },
+                        {
+                              "@type": "Question",
+                              "name": "Vocês fazem projeto personalizado ou é tamanho de catálogo?",
+                              "acceptedAnswer": {
+                                    "@type": "Answer",
+                                    "text": "Personalizado. A câmara é montada em painéis, na medida do seu ponto: definimos capacidade, espessura de painel, tipo de porta e degelo a partir do que você armazena e de quanto espaço existe. Isso vale para qualquer tipo, da resfriada de açougue à expositora com portas de vidro."
+                              }
+                        },
+                        {
+                              "@type": "Question",
+                              "name": "Que tipos de câmara fria vocês fabricam?",
+                              "acceptedAnswer": {
+                                    "@type": "Answer",
+                                    "text": "Resfriadas, de congelados, modulares e desmontáveis, expositoras com portas de vidro (walk-in cooler), câmaras de bebidas e chopp (beer cave) e frigoríficas industriais. O tipo é definido no levantamento, a partir do que você armazena e do espaço disponível."
+                              }
+                        },
+                        {
+                              "@type": "Question",
+                              "name": "A instalação é feita por vocês mesmos?",
+                              "acceptedAnswer": {
+                                    "@type": "Answer",
+                                    "text": "Sim, do começo ao fim: painéis, unidades condensadora e evaporadora, tubulação frigorífica, dreno e ligação elétrica, com a nossa equipe. A instalação tem 12 meses de garantia."
+                              }
+                        },
+                        {
+                              "@type": "Question",
+                              "name": "Quanto tempo leva?",
+                              "acceptedAnswer": {
+                                    "@type": "Answer",
+                                    "text": "Depende do porte e da agenda de fabricação, e por isso o prazo é fechado junto com o projeto, no levantamento. O que podemos garantir é que o prazo sai por escrito antes de a produção começar."
+                              }
+                        },
+                        {
+                              "@type": "Question",
+                              "name": "E depois de instalar, quem dá assistência?",
+                              "acceptedAnswer": {
+                                    "@type": "Answer",
+                                    "text": "A mesma equipe. Fazemos manutenção preventiva, corretiva, higienização e reforma, então você não fica procurando quem atende o equipamento depois."
+                              }
+                        },
+                        {
+                              "@type": "Question",
+                              "name": "Como faço para solicitar o orçamento?",
+                              "acceptedAnswer": {
+                                    "@type": "Answer",
+                                    "text": "Preencha o formulário com nome e telefone. Retornamos o contato para o levantamento, e o orçamento sai daí, não de tabela. Sem compromisso e sem cadastro."
+                              }
+                        }
+                  ]
+            }
+      ]
+}
     </script>
 
     <script>
