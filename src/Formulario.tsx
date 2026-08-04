@@ -1,17 +1,19 @@
 import React, { useState } from 'react';
-import { EMPRESA_DADOS, ENDPOINT_LEAD, SEGMENTOS } from './conteudo';
+import { EMPRESA_DADOS, ENDPOINT_LEAD } from './conteudo';
 import { lerRastreio } from './rastreio';
 
 /**
  * Formulario da landing.
  *
- * Obrigatorios: nome e telefone. Todo o resto e coletado, mas nao trava o
- * envio.
+ * Os mesmos quatro campos do modal do site principal: nome completo, telefone,
+ * e-mail e o que a pessoa precisa. Quem pede orcamento pelos dois caminhos
+ * responde as mesmas perguntas, e os leads chegam comparaveis no painel.
  *
- * O raciocinio: com nome e telefone valido ja da para trabalhar o lead, e cada
- * campo obrigatorio a mais derruba a taxa de preenchimento. Os campos opcionais
- * continuam na tela porque boa parte das pessoas preenche assim mesmo — e
- * quando preenchem, o levantamento ja comeca adiantado.
+ * Diferenca proposital: la os quatro sao obrigatorios; aqui so nome e telefone
+ * travam o envio. Esta e uma pagina de anuncio, onde cada campo obrigatorio a
+ * mais custa preenchimento — e com nome e telefone valido ja da para trabalhar
+ * o lead. Os outros dois seguem visiveis porque boa parte das pessoas preenche
+ * mesmo sem ser obrigada.
  */
 
 type Estado = 'parado' | 'enviando' | 'enviado' | 'erro';
@@ -51,12 +53,10 @@ export const Formulario: React.FC<Props> = ({ variante = 'hero', id }) => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           nome: dados.get('nome'),
-          sobrenome: dados.get('sobrenome'),
           contato: dados.get('contato'),
           email: dados.get('email'),
-          cidade: dados.get('cidade'),
-          tipo_negocio: dados.get('tipo_negocio'),
           necessidade: dados.get('necessidade'),
+          origem: 'landing-camara-fria',
           website: dados.get('website'),
           // De onde a pessoa veio: gclid do Ads, utm, referrer e aparelho.
           ...lerRastreio(),
@@ -133,35 +133,23 @@ export const Formulario: React.FC<Props> = ({ variante = 'hero', id }) => {
       </p>
 
       <div className="grid gap-4">
-        <div className="grid grid-cols-2 gap-3">
-          <div>
-            <label className={rotulo} htmlFor={`${id}-nome`}>
-              Nome
-            </label>
-            <input
-              id={`${id}-nome`}
-              name="nome"
-              required
-              autoComplete="given-name"
-              className={campo}
-            />
-          </div>
-          <div>
-            <label className={rotulo} htmlFor={`${id}-sobrenome`}>
-              Sobrenome <span className="normal-case font-normal text-slate-500">(opcional)</span>
-            </label>
-            <input
-              id={`${id}-sobrenome`}
-              name="sobrenome"
-              autoComplete="family-name"
-              className={campo}
-            />
-          </div>
+        <div>
+          <label className={rotulo} htmlFor={`${id}-nome`}>
+            Nome completo
+          </label>
+          <input
+            id={`${id}-nome`}
+            name="nome"
+            required
+            autoComplete="name"
+            placeholder="Seu nome"
+            className={campo}
+          />
         </div>
 
         <div>
           <label className={rotulo} htmlFor={`${id}-contato`}>
-            Telefone / WhatsApp
+            WhatsApp / Telefone
           </label>
           <input
             id={`${id}-contato`}
@@ -177,7 +165,7 @@ export const Formulario: React.FC<Props> = ({ variante = 'hero', id }) => {
 
         <div>
           <label className={rotulo} htmlFor={`${id}-email`}>
-            E-mail <span className="normal-case font-normal text-slate-500">(opcional)</span>
+            E-mail <span className="font-normal normal-case text-slate-500">(opcional)</span>
           </label>
           <input
             id={`${id}-email`}
@@ -185,48 +173,21 @@ export const Formulario: React.FC<Props> = ({ variante = 'hero', id }) => {
             type="email"
             inputMode="email"
             autoComplete="email"
-            placeholder="nome@empresa.com.br"
+            placeholder="seu@email.com"
             className={campo}
           />
         </div>
 
-        <div className="grid grid-cols-2 gap-3">
-          <div>
-            <label className={rotulo} htmlFor={`${id}-tipo`}>
-              Segmento <span className="normal-case font-normal text-slate-500">(opcional)</span>
-            </label>
-            <select id={`${id}-tipo`} name="tipo_negocio" defaultValue="" className={campo}>
-              <option value="">Selecione</option>
-              {SEGMENTOS.map((nome) => (
-                <option key={nome} value={nome}>
-                  {nome}
-                </option>
-              ))}
-              <option value="Outro">Outro</option>
-            </select>
-          </div>
-          <div>
-            <label className={rotulo} htmlFor={`${id}-cidade`}>
-              Cidade <span className="normal-case font-normal text-slate-500">(opcional)</span>
-            </label>
-            <input
-              id={`${id}-cidade`}
-              name="cidade"
-              autoComplete="address-level2"
-              className={campo}
-            />
-          </div>
-        </div>
-
         <div>
           <label className={rotulo} htmlFor={`${id}-necessidade`}>
-            O que precisa armazenar <span className="normal-case font-normal text-slate-500">(opcional)</span>
+            O que você precisa?{' '}
+            <span className="font-normal normal-case text-slate-500">(opcional)</span>
           </label>
           <textarea
             id={`${id}-necessidade`}
             name="necessidade"
-            rows={2}
-            placeholder="Ex.: carnes resfriadas, câmara de uns 3x3 no fundo da loja"
+            rows={3}
+            placeholder="Ex.: câmara fria para açougue, uns 3x3, em Cascavel"
             className={campo}
           />
         </div>
