@@ -260,6 +260,8 @@ export const EMPRESA = {
   titulo: '15 anos de experiência em refrigeração comercial',
   foto: '/images/sobre/robert-escritorio.webp',
   fotoAlt: 'Robert Góis, fundador da Refrigóis, no escritório da empresa',
+  fotoSecundaria: '/images/sobre/robert-loja.webp',
+  fotoSecundariaAlt: 'Robert Góis atendendo em loja, junto aos expositores de bebidas',
   paragrafos: [
     'À frente da Refrigóis está Robert Góis, profissional com 15 anos de experiência em refrigeração comercial. Ao longo desse tempo, atendendo açougues, mercados, padarias, restaurantes e distribuidoras, ele consolidou o padrão que define a empresa: rigor técnico, transparência e compromissos cumpridos.',
     'Honestidade, respeito e dedicação orientam cada atendimento, do primeiro orçamento à manutenção anos depois. Homem de família e de fé, Robert leva esses valores para a gestão e conduz cada projeto pessoalmente, por entender que a confiança é a base de toda relação comercial duradoura.',

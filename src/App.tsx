@@ -311,7 +311,11 @@ export const App: React.FC = () => {
           Refrigois no Google encontrar a mesma historia. ───────────────── */}
       <Secao className="bg-slate-50">
         <div className="grid gap-10 lg:grid-cols-2 lg:items-center lg:gap-16">
-          <div className="relative">
+          {/* Composicao de duas fotos, igual a do site principal: uma no
+              escritorio e outra em campo. A de campo mostra atendimento
+              acontecendo, que e o que a foto posada sozinha nao diz.
+              Espaco a esquerda e embaixo para as duas pecas sobrepostas. */}
+          <div className="relative pb-10 sm:pb-0 sm:pl-8">
             <img
               src={EMPRESA.foto}
               alt={EMPRESA.fotoAlt}
@@ -321,9 +325,21 @@ export const App: React.FC = () => {
               decoding="async"
               className="aspect-[4/3] w-full rounded-2xl object-cover shadow-2xl"
             />
+
+            {/* Some no celular: sobreposta numa tela estreita, ela cobriria a
+                foto principal em vez de complementar. */}
+            <img
+              src={EMPRESA.fotoSecundaria}
+              alt={EMPRESA.fotoSecundariaAlt}
+              width={760}
+              height={1140}
+              loading="lazy"
+              decoding="async"
+              className="absolute -bottom-8 left-0 hidden aspect-[3/4] w-32 rounded-xl border-4 border-slate-50 object-cover shadow-2xl sm:block md:w-44"
+            />
             {/* Selo de tempo de casa, como no site principal: e o numero que a
                 pessoa guarda depois de fechar a pagina. */}
-            <div className="absolute -bottom-5 right-4 flex items-center gap-3 rounded-2xl bg-white px-5 py-3 shadow-xl ring-1 ring-slate-100">
+            <div className="absolute -bottom-5 right-4 z-10 flex items-center gap-3 rounded-2xl bg-white px-5 py-3 shadow-xl ring-1 ring-slate-100 sm:-right-4">
               <span className="text-4xl font-extrabold leading-none text-brand-600">15</span>
               <span className="text-[11px] font-bold uppercase leading-tight tracking-wide text-slate-700">
                 anos de
