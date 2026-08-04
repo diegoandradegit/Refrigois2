@@ -264,26 +264,32 @@ export const EMPRESA = {
 export const TIPOS = [
   {
     nome: 'Câmara resfriada',
-    linha: 'De 0 °C a 5 °C, para carnes frescas, laticínios, hortifrúti e bebidas.',
+    etiqueta: '0 °C a 5 °C',
+    linha: 'Carnes frescas, laticínios, hortifrúti e bebidas.',
   },
   {
     nome: 'Câmara de congelados',
-    linha: 'De −18 °C a −25 °C, para estoque congelado e ilhas de apoio.',
+    etiqueta: '−18 °C a −25 °C',
+    linha: 'Estoque congelado e ilhas de apoio.',
   },
   {
-    nome: 'Câmara expositora com portas de vidro',
-    linha: 'Conhecida como walk-in cooler: exposição e autosserviço sem abrir a câmara inteira.',
+    nome: 'Câmara expositora',
+    etiqueta: 'walk-in cooler',
+    linha: 'Portas de vidro: exposição e autosserviço sem abrir a câmara inteira.',
   },
   {
-    nome: 'Câmara para bebidas e chopp',
-    linha: 'A beer cave de bares, choperias, adegas e conveniências, com barril na temperatura certa.',
+    nome: 'Câmara de bebidas e chopp',
+    etiqueta: 'beer cave',
+    linha: 'Bares, choperias, adegas e conveniências, com o barril na temperatura certa.',
   },
   {
-    nome: 'Câmara modular e desmontável',
-    linha: 'Montada em painéis encaixados: pode ser ampliada ou remontada em outro ponto.',
+    nome: 'Câmara modular',
+    etiqueta: 'desmontável',
+    linha: 'Painéis encaixados: pode ser ampliada ou remontada em outro ponto.',
   },
   {
-    nome: 'Câmara frigorífica industrial',
+    nome: 'Câmara frigorífica',
+    etiqueta: 'industrial',
     linha: 'Grande volume, para indústria, logística e distribuição.',
   },
 ];

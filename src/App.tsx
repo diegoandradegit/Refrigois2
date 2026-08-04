@@ -220,14 +220,21 @@ export const App: React.FC = () => {
             espessura do painel, o tipo de porta e o degelo — e é isso que o levantamento define.
           </p>
 
-          <dl className="mt-8 divide-y divide-slate-200 border-y border-slate-200">
+          {/* Cards com etiqueta: a faixa de temperatura ou o nome de mercado
+              vira ancora visual, e a pessoa acha o caso dela sem ler tudo. */}
+          <div className="mt-8 grid gap-4 sm:grid-cols-2">
             {TIPOS.map((tipo, i) => (
-              <Revelar key={tipo.nome} atraso={(i % 3) * 0.06} className="py-4">
-                <dt className="font-semibold text-slate-900">{tipo.nome}</dt>
-                <dd className="mt-1 text-sm leading-relaxed text-slate-600">{tipo.linha}</dd>
+              <Revelar key={tipo.nome} atraso={(i % 2) * 0.08}>
+                <div className="group h-full rounded-xl border border-slate-200 bg-white p-5 transition duration-300 hover:-translate-y-0.5 hover:border-brand-300 hover:shadow-lg hover:shadow-brand-900/5">
+                  <span className="inline-block rounded-full bg-brand-50 px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider text-brand-700 transition group-hover:bg-brand-100">
+                    {tipo.etiqueta}
+                  </span>
+                  <p className="mt-3 font-bold text-slate-900">{tipo.nome}</p>
+                  <p className="mt-1.5 text-sm leading-relaxed text-slate-600">{tipo.linha}</p>
+                </div>
               </Revelar>
             ))}
-          </dl>
+          </div>
 
           <ChamadaFinalDeBloco
             aoClicar={abrir}
@@ -248,16 +255,16 @@ export const App: React.FC = () => {
           </p>
         </div>
 
-        <dl className="mt-10 max-w-3xl divide-y divide-white/10 border-y border-white/10">
+        <div className="mt-10 grid max-w-4xl gap-4 md:grid-cols-3">
           {ERROS.map((item, i) => (
-            <Revelar key={item.titulo} atraso={i * 0.08} className="py-6">
-            <div>
-              <dt className="text-lg font-semibold text-white">{item.titulo}</dt>
-              <dd className="mt-2 leading-relaxed text-slate-400">{item.texto}</dd>
-            </div>
+            <Revelar key={item.titulo} atraso={i * 0.08}>
+              <div className="group h-full border-l-2 border-white/15 bg-white/[0.04] p-5 transition duration-300 hover:border-brand-500 hover:bg-white/[0.07]">
+                <p className="font-bold leading-snug text-white">{item.titulo}</p>
+                <p className="mt-2 text-sm leading-relaxed text-slate-400">{item.texto}</p>
+              </div>
             </Revelar>
           ))}
-        </dl>
+        </div>
 
         <ChamadaFinalDeBloco
           claro
@@ -269,13 +276,16 @@ export const App: React.FC = () => {
       {/* ── Diferenciais como argumento, não como lista de adjetivos ─────── */}
       <Secao>
         <Titulo>Por que fechar com a Refrigóis</Titulo>
-        <div className="mt-8 grid gap-x-10 gap-y-7 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {DIFERENCIAIS.map((d, i) => (
             <Revelar key={d.titulo} atraso={(i % 3) * 0.08}>
-            <div>
-              <p className="font-semibold text-slate-900">{d.titulo}</p>
-              <p className="mt-1.5 text-sm leading-relaxed text-slate-600">{d.texto}</p>
-            </div>
+              {/* Barra de acento no topo em vez de borda inteira: distingue
+                  destes cards dos de tipo, para as duas secoes nao parecerem a
+                  mesma coisa repetida. */}
+              <div className="group h-full border-t-2 border-slate-200 bg-slate-50 p-5 transition duration-300 hover:border-brand-500 hover:bg-white hover:shadow-lg hover:shadow-brand-900/5">
+                <p className="font-bold text-slate-900">{d.titulo}</p>
+                <p className="mt-1.5 text-sm leading-relaxed text-slate-600">{d.texto}</p>
+              </div>
             </Revelar>
           ))}
         </div>
@@ -332,16 +342,21 @@ export const App: React.FC = () => {
           operação, e não sobre o equipamento.
         </p>
 
-        <ol className="mt-9 grid gap-7 sm:grid-cols-2 lg:grid-cols-3">
+        <ol className="mt-9 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {ETAPAS.map((etapa, i) => (
             <Revelar key={etapa.titulo} atraso={(i % 3) * 0.08}>
-            <li className="border-t-2 border-brand-500 pt-4">
-              <span aria-hidden="true" className="text-sm font-bold text-brand-600">
-                {String(i + 1).padStart(2, '0')}
-              </span>
-              <h3 className="mt-1 font-semibold">{etapa.titulo}</h3>
-              <p className="mt-1.5 text-sm leading-relaxed text-slate-600">{etapa.texto}</p>
-            </li>
+              <li className="group flex h-full gap-4 rounded-xl bg-slate-50 p-5 transition duration-300 hover:bg-white hover:shadow-lg hover:shadow-brand-900/5">
+                <span
+                  aria-hidden="true"
+                  className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-brand-600 text-sm font-bold text-white transition group-hover:scale-110"
+                >
+                  {i + 1}
+                </span>
+                <div>
+                  <h3 className="font-bold text-slate-900">{etapa.titulo}</h3>
+                  <p className="mt-1 text-sm leading-relaxed text-slate-600">{etapa.texto}</p>
+                </div>
+              </li>
             </Revelar>
           ))}
         </ol>
