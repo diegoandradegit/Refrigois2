@@ -25,12 +25,21 @@
     Referrer-Policy = "strict-origin-when-cross-origin"
 
 # Pagina unica: qualquer caminho cai na landing.
-# Arquivos que precisam existir como arquivo, e nao cair na pagina unica.
+# Paginas legais em endereco limpo, sem a extensao .html.
 [[redirects]]
-  from = "/robots.txt"
-  to = "/robots.txt"
+  from = "/privacidade"
+  to = "/privacidade.html"
   status = 200
-  force = false
+
+[[redirects]]
+  from = "/termos"
+  to = "/termos.html"
+  status = 200
+
+[[redirects]]
+  from = "/cookies"
+  to = "/cookies.html"
+  status = 200
 
 # Pagina unica: qualquer outro caminho cai na landing.
 [[redirects]]

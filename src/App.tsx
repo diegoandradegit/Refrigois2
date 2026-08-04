@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Formulario } from './Formulario';
 import { ModalOrcamento } from './ModalOrcamento';
+import { AvisoCookies } from './AvisoCookies';
 import { FaixaSegmentos, Revelar } from './Efeitos';
 import {
   APLICACOES,
@@ -507,11 +508,25 @@ export const App: React.FC = () => {
             <p className="mt-4 text-xs text-slate-600">
               Atendimento em todo o Paraná · Refrigeração comercial
             </p>
+            {/* Paginas legais em HTML puro, sem JavaScript: abrem na hora para
+                quem esta conferindo a empresa antes de deixar o contato. */}
+            <p className="mt-3 flex flex-wrap gap-x-4 gap-y-1 text-xs text-slate-500 sm:justify-end">
+              <a href="/privacidade" className="hover:text-slate-300">
+                Política de privacidade
+              </a>
+              <a href="/termos" className="hover:text-slate-300">
+                Termos de uso
+              </a>
+              <a href="/cookies" className="hover:text-slate-300">
+                Cookies
+              </a>
+            </p>
           </div>
         </div>
       </footer>
 
       <ModalOrcamento aberto={modal} aoFechar={() => setModal(false)} />
+      <AvisoCookies />
     </div>
   );
 };

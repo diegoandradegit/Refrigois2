@@ -231,38 +231,32 @@
 }
     </script>
 
+    <!-- Conexao antecipada com o servidor do formulario: economiza a
+         negociacao de DNS e TLS no momento do envio, que e o instante em que
+         a espera custa lead. -->
+    <link rel="preconnect" href="https://mpdlwheqvggbfxkhbtqg.supabase.co" crossorigin />
+    <link rel="dns-prefetch" href="https://mpdlwheqvggbfxkhbtqg.supabase.co" />
+
     <script>
-      // O gtag.js pesa cerca de 160 KB. Numa landing de anuncio, cada decimo
-      // de segundo no carregamento e lance pago que nao vira lead — entao ele
-      // so entra depois que a pagina termina, ou na primeira interacao.
-      // As chamadas abaixo ficam na fila do dataLayer e sao processadas quando
-      // o script chega, entao nenhuma conversao se perde.
+      // A fila do Google fica pronta desde o inicio, mas nenhum script de
+      // medicao e baixado aqui. O carregamento acontece so depois do aceite no
+      // aviso de cookies (ver src/AvisoCookies.tsx) — pedir permissao depois de
+      // ja ter medido nao e permissao.
+      //
+      // O que for chamado antes do aceite fica enfileirado no dataLayer e e
+      // processado quando (e se) o script chegar. Nada se perde e nada vaza.
       window.dataLayer = window.dataLayer || [];
       function gtag() { dataLayer.push(arguments); }
       gtag('js', new Date());
+      gtag('consent', 'default', {
+        ad_storage: 'denied',
+        ad_user_data: 'denied',
+        ad_personalization: 'denied',
+        analytics_storage: 'denied',
+      });
       gtag('config', 'G-ME19B7BEPB');
-
-      (function () {
-        var carregado = false;
-        function carregarGA() {
-          if (carregado) return;
-          carregado = true;
-          var s = document.createElement('script');
-          s.async = true;
-          s.src = 'https://www.googletagmanager.com/gtag/js?id=G-ME19B7BEPB';
-          document.head.appendChild(s);
-        }
-        ['pointerdown', 'keydown', 'scroll'].forEach(function (evento) {
-          window.addEventListener(evento, carregarGA, { once: true, passive: true });
-        });
-        function aposCarregar() {
-          if (window.requestIdleCallback) requestIdleCallback(carregarGA, { timeout: 2000 });
-          else setTimeout(carregarGA, 1000);
-        }
-        if (document.readyState === 'complete') aposCarregar();
-        else window.addEventListener('load', aposCarregar);
-      })();
     </script>
+
   </head>
   <body>
     <div id="root"></div>
