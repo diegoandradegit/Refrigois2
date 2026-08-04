@@ -458,7 +458,7 @@ export const App: React.FC = () => {
         </div>
       </Secao>
 
-      <footer className="border-t border-white/10 bg-slate-950 px-5 pb-24 pt-10 sm:px-8 sm:pb-12">
+      <footer className="border-t border-white/10 bg-slate-950 px-5 pb-12 pt-10 sm:px-8">
         <div className="mx-auto grid max-w-6xl gap-6 text-sm text-slate-400 sm:grid-cols-2">
           <div>
             <p className="font-semibold text-slate-200">{EMPRESA_DADOS.razao}</p>
@@ -483,16 +483,6 @@ export const App: React.FC = () => {
           </div>
         </div>
       </footer>
-
-      {/* Barra fixa no celular: a CTA acompanha a rolagem inteira. */}
-      <div className="fixed inset-x-0 bottom-0 z-50 border-t border-slate-800 bg-slate-950/95 p-3 backdrop-blur sm:hidden">
-        <button
-          onClick={abrir}
-          className="block w-full rounded-lg bg-brand-600 px-4 py-3.5 text-center text-sm font-bold text-white"
-        >
-          Solicitar orçamento
-        </button>
-      </div>
 
       <ModalOrcamento aberto={modal} aoFechar={() => setModal(false)} />
     </div>
