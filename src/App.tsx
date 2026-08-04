@@ -193,13 +193,24 @@ export const App: React.FC = () => {
         <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {OBRAS.map((obra, i) => (
             <Revelar key={obra.imagem} atraso={(i % 3) * 0.08}>
-            <figure>
-              <Foto nome={obra.imagem} alt={obra.alt} className="aspect-[4/3] w-full object-cover" />
-              <figcaption className="mt-3">
-                <p className="font-semibold text-slate-900">{obra.titulo}</p>
-                <p className="mt-0.5 text-sm leading-relaxed text-slate-600">{obra.linha}</p>
-              </figcaption>
-            </figure>
+              <figure className="group h-full overflow-hidden rounded-xl bg-white ring-1 ring-slate-200 transition duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-brand-900/10">
+                <div className="relative overflow-hidden">
+                  <Foto
+                    nome={obra.imagem}
+                    alt={obra.alt}
+                    className="aspect-[4/3] w-full object-cover transition duration-500 group-hover:scale-105"
+                  />
+                  {/* Etiqueta do tipo sobre a foto: quem esta procurando um
+                      caso especifico reconhece o dele so passando o olho. */}
+                  <span className="absolute left-3 top-3 rounded-full bg-slate-950/75 px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider text-white backdrop-blur-sm">
+                    {obra.tipo}
+                  </span>
+                </div>
+                <figcaption className="p-4">
+                  <p className="font-bold text-slate-900">{obra.titulo}</p>
+                  <p className="mt-1.5 text-sm leading-relaxed text-slate-600">{obra.linha}</p>
+                </figcaption>
+              </figure>
             </Revelar>
           ))}
         </div>

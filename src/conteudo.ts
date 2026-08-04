@@ -55,40 +55,68 @@ export const APLICACOES =
 /** Prova. Tres obras grandes; seis fotos pequenas viram enfeite. */
 export const OBRAS = [
   {
-    titulo: 'Câmara Fria para Supermercado',
-    linha: 'Resfriados e congelados na mesma operação, com alto giro',
-    imagem: 'refrigeracao-de-supermercado',
-    alt: 'Câmara fria e sistema de refrigeração instalados em supermercado',
+    titulo: 'Câmara expositora de bebidas',
+    tipo: 'walk-in cooler',
+    imagem: 'obras/autosservico-bebidas-mercado',
+    linha:
+      'Autosserviço com portas de vidro: o cliente pega a bebida gelada sem que ninguém abra a câmara inteira. Iluminação em cada porta e prateleiras dimensionadas para giro alto.',
+    alt: 'Câmara fria expositora com portas de vidro e prateleiras cheias de bebidas em mercado',
   },
   {
-    titulo: 'Câmara Fria para Açougue',
-    linha: 'Carnes resfriadas com temperatura estável o dia inteiro',
-    imagem: 'acougue-sao-jose-balcao-1',
-    alt: 'Câmara fria e balcões refrigerados instalados em açougue',
+    titulo: 'Câmara expositora para açougue',
+    tipo: 'carnes resfriadas',
+    imagem: 'obras/expositora-carnes-acougue',
+    linha:
+      'Peças à vista, na temperatura de trabalho, com controlador digital no painel. Prateleiras em altura útil para carne embalada e produto de venda rápida.',
+    alt: 'Câmara expositora com portas de vidro exibindo cortes de carne resfriada em açougue',
   },
   {
-    titulo: 'Câmara Fria para Distribuidora',
-    linha: 'Portas de vidro para exposição e autosserviço',
-    imagem: 'camara-fria-portas-vidro',
-    alt: 'Câmara fria com portas de vidro para distribuidora de bebidas',
+    titulo: 'Bebidas e carnes na mesma linha',
+    tipo: 'duas temperaturas',
+    imagem: 'obras/expositora-bebidas-carnes',
+    linha:
+      'Duas faixas de temperatura lado a lado, cada uma com o próprio controle. Bebidas de um lado, carnes do outro, sem misturar a operação nem o consumo de energia.',
+    alt: 'Expositores com portas de vidro, com bebidas de um lado e carnes do outro',
   },
   {
-    titulo: 'Câmara Frigorífica Industrial',
-    linha: 'Painéis isotérmicos e sistema para grande volume',
-    imagem: 'camara-frigorifica-industrial',
-    alt: 'Câmara frigorífica industrial em painéis isotérmicos',
+    titulo: 'Câmara dupla: resfriados e congelados',
+    tipo: 'duas câmaras geminadas',
+    imagem: 'obras/camara-dupla-resfriado-congelado',
+    linha:
+      'Duas câmaras compartilhando parede, cada uma com evaporador e controle próprios. Resolve resfriado e congelado no mesmo espaço, ocupando menos área do que duas separadas.',
+    alt: 'Duas câmaras frias geminadas em painel isotérmico, com portas frigoríficas e evaporadores',
   },
   {
-    titulo: 'Câmara Resfriada sob Medida',
-    linha: 'Prateleiras e layout interno conforme o giro do produto',
-    imagem: 'camara-fria-prateleiras',
-    alt: 'Interior de câmara fria resfriada com prateleiras em aço inox',
+    titulo: 'Beer cave de conveniência',
+    tipo: 'bebidas e chopp',
+    imagem: 'obras/camara-expositora-conveniencia',
+    linha:
+      'Câmara de bebidas construída dentro da loja, com porta de vidro em toda a frente e expositor de gelo ao lado. O estoque gelado vira vitrine.',
+    alt: 'Câmara fria de bebidas com portas de vidro instalada em loja de conveniência',
   },
   {
-    titulo: 'Câmara Fria para Farmácia',
-    linha: 'Controle rigoroso para produtos termossensíveis',
-    imagem: 'refrigeracao-para-farmacia',
-    alt: 'Equipamento de refrigeração instalado em farmácia',
+    titulo: 'Acabamento sob medida',
+    tipo: 'walk-in cooler',
+    imagem: 'obras/camara-expositora-preta',
+    linha:
+      'A mesma câmara pode receber o acabamento que a loja pede. Aqui, revestimento preto do piso ao teto para acompanhar o projeto visual do salão.',
+    alt: 'Câmara fria expositora com acabamento externo preto e portas de vidro',
+  },
+  {
+    titulo: 'Montagem em painel isotérmico',
+    tipo: 'execução',
+    imagem: 'obras/montagem-camara-loja',
+    linha:
+      'Painéis encaixados e vedados no local, dentro da loja pronta. Sem obra civil e sem parede erguida: a câmara é construída no ponto onde vai trabalhar.',
+    alt: 'Técnico da Refrigóis montando painéis isotérmicos de câmara fria dentro de uma loja',
+  },
+  {
+    titulo: 'Vãos abertos para as portas de vidro',
+    tipo: 'execução',
+    imagem: 'obras/montagem-paineis-expositora',
+    linha:
+      'Os vãos são recortados no painel de acordo com o número de portas do projeto. É esta etapa que define quantas portas a loja terá de frente para o cliente.',
+    alt: 'Estrutura de câmara fria em painel isotérmico com vãos recortados para portas de vidro',
   },
 ];
 
