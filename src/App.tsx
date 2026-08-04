@@ -207,9 +207,6 @@ export const App: React.FC = () => {
                 <BotaoOrcamento aoClicar={abrir} largo destaque>
                   Solicitar orçamento
                 </BotaoOrcamento>
-                <p className="mt-3 text-sm text-slate-400">
-                  Só nome e telefone. Sem compromisso e sem cadastro.
-                </p>
               </div>
             </div>
 
