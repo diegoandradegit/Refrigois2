@@ -223,7 +223,7 @@ export const App: React.FC = () => {
       <FaixaSegmentos itens={SEGMENTOS_FAIXA} />
 
       {/* ── Prova: obra real, com o segmento no titulo ───────────────────── */}
-      <Secao>
+      <Secao id="obras">
         <Titulo>Câmaras que já entregamos</Titulo>
         <p className="mt-3 max-w-2xl text-slate-600">
           Fotos das nossas próprias instalações, não imagens de catálogo.
@@ -262,7 +262,7 @@ export const App: React.FC = () => {
 
       {/* ── Tipos: camara fria nao e uma coisa so, e cada tipo tem um nome
           proprio pelo qual as pessoas buscam. ─────────────────────────── */}
-      <Secao className="bg-slate-50">
+      <Secao className="bg-slate-50" id="tipos">
         <div className="max-w-3xl">
           <Titulo>Que tipo de câmara você precisa?</Titulo>
           <p className="mt-3 text-slate-600">
@@ -418,7 +418,7 @@ export const App: React.FC = () => {
       </Secao>
 
       {/* ── Como funciona: seis passos, do pedido à entrega ──────────────── */}
-      <Secao>
+      <Secao id="como-funciona">
         <Titulo>Do pedido à entrega</Titulo>
         <p className="mt-3 max-w-2xl text-slate-600">
           O orçamento sai do levantamento, não de tabela. Por isso a primeira conversa é sobre a sua
@@ -448,7 +448,7 @@ export const App: React.FC = () => {
       </Secao>
 
       {/* ── Perguntas: cada uma remove um motivo de não pedir ────────────── */}
-      <Secao className="bg-slate-50">
+      <Secao className="bg-slate-50" id="perguntas">
         <div className="max-w-3xl">
           <Titulo>Perguntas frequentes</Titulo>
           <div className="mt-8 divide-y divide-slate-200 border-y border-slate-200">
