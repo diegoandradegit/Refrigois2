@@ -39,8 +39,13 @@ const CIDADES_SUGERIDAS = [
 ];
 
 interface Props {
-  /** 'hero' aparece sobre fundo escuro; 'claro' no fechamento da pagina. */
-  variante?: 'hero' | 'claro';
+  /**
+   * 'hero'  — cartao proprio sobre o fundo escuro da pagina
+   * 'claro' — cartao proprio sobre fundo claro
+   * 'modal' — sem cartao: o modal ja desenha o fundo, a borda e o titulo,
+   *           e repetir isso criava moldura dentro de moldura
+   */
+  variante?: 'hero' | 'claro' | 'modal';
   id?: string;
 }
 
@@ -57,7 +62,8 @@ export const Formulario: React.FC<Props> = ({ variante = 'hero', id }) => {
   const [estado, setEstado] = useState<Estado>('parado');
   const [mensagem, setMensagem] = useState('');
 
-  const escuro = variante === 'hero';
+  const escuro = variante === 'hero' || variante === 'modal';
+  const dentroDoModal = variante === 'modal';
 
   async function enviar(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -140,19 +146,27 @@ export const Formulario: React.FC<Props> = ({ variante = 'hero', id }) => {
       id={id}
       onSubmit={enviar}
       noValidate
-      className={`rounded-lg p-5 sm:p-6 ${
-        escuro
-          ? 'bg-slate-900/70 backdrop-blur-md ring-1 ring-white/15'
-          : 'bg-white ring-1 ring-slate-200 shadow-lg'
-      }`}
+      className={
+        dentroDoModal
+          ? ''
+          : `rounded-lg p-5 sm:p-6 ${
+              escuro
+                ? 'bg-slate-900/70 backdrop-blur-md ring-1 ring-white/15'
+                : 'bg-white ring-1 ring-slate-200 shadow-lg'
+            }`
+      }
     >
-      <p className={`text-lg font-bold mb-1 ${escuro ? 'text-white' : 'text-slate-900'}`}>
-        Peça seu orçamento
-      </p>
-      <p className={`text-sm mb-5 ${escuro ? 'text-slate-300' : 'text-slate-600'}`}>
-        Conte o que precisa armazenar e em que espaço. O orçamento sai do levantamento, não de
-        tabela.
-      </p>
+      {!dentroDoModal && (
+        <>
+          <p className={`text-lg font-bold mb-1 ${escuro ? 'text-white' : 'text-slate-900'}`}>
+            Peça seu orçamento
+          </p>
+          <p className={`text-sm mb-5 ${escuro ? 'text-slate-300' : 'text-slate-600'}`}>
+            Conte o que precisa armazenar e em que espaço. O orçamento sai do levantamento, não de
+            tabela.
+          </p>
+        </>
+      )}
 
       <div className="grid gap-4">
         <div>

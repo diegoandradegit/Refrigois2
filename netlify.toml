@@ -25,6 +25,20 @@
     Referrer-Policy = "strict-origin-when-cross-origin"
 
 # Pagina unica: qualquer caminho cai na landing.
+# HTTPS obrigatorio.
+#
+# O painel do Netlify nao mostrou a chave "Force HTTPS" nesta conta, entao o
+# redirecionamento vai aqui, no codigo. Sem ele a pagina continua respondendo em
+# http, e o navegador mostra o aviso de site nao seguro — justamente na pagina
+# que pede telefone e e-mail de quem esta pedindo orcamento.
+#
+# force = true para valer antes de qualquer outra regra.
+[[redirects]]
+  from = "http://camara-fria.refrigois.com.br/*"
+  to = "https://camara-fria.refrigois.com.br/:splat"
+  status = 301
+  force = true
+
 # Paginas legais em endereco limpo, sem a extensao .html.
 [[redirects]]
   from = "/privacidade"

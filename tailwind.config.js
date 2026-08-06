@@ -33,6 +33,12 @@ export default {
         },
         // Respiro frio ao redor do botao principal: um halo que abre e some,
         // no azul-gelo da marca.
+        // Painel entrando de baixo: o movimento curto diz de onde ele veio e
+        // para onde volta ao fechar.
+        subir: {
+          '0%': { transform: 'translateY(100%)' },
+          '100%': { transform: 'translateY(0)' },
+        },
         halo: {
           '0%, 100%': { boxShadow: '0 0 0 0 rgba(56, 189, 248, 0.5)' },
           '70%': { boxShadow: '0 0 0 14px rgba(56, 189, 248, 0)' },
@@ -43,6 +49,7 @@ export default {
         correr: 'correr 32s linear infinite',
         brilho: 'brilho 4.5s ease-in-out infinite',
         halo: 'halo 3s ease-out infinite',
+        subir: 'subir 0.28s cubic-bezier(0.32, 0.72, 0, 1)',
       },
     },
   },
