@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { EMPRESA_DADOS, ENDPOINT_LEAD } from './conteudo';
+import { EMPRESA_DADOS, ENDPOINT_LEAD, SEGMENTOS } from './conteudo';
 import { lerRastreio } from './rastreio';
 
 /**
@@ -9,14 +9,34 @@ import { lerRastreio } from './rastreio';
  * e-mail e o que a pessoa precisa. Quem pede orcamento pelos dois caminhos
  * responde as mesmas perguntas, e os leads chegam comparaveis no painel.
  *
- * Diferenca proposital: la os quatro sao obrigatorios; aqui so nome e telefone
- * travam o envio. Esta e uma pagina de anuncio, onde cada campo obrigatorio a
- * mais custa preenchimento — e com nome e telefone valido ja da para trabalhar
- * o lead. Os outros dois seguem visiveis porque boa parte das pessoas preenche
- * mesmo sem ser obrigada.
+ * Obrigatorios: nome, telefone, cidade e tipo de negocio. Os dois ultimos
+ * entraram como obrigatorios de proposito — custam preenchimento, mas sem eles
+ * o comercial liga sem saber se o servico e viavel no endereco nem que
+ * equipamento a pessoa usa, e a ligacao vira entrevista em vez de proposta.
+ *
+ * Para o custo ser o menor possivel, nenhum dos dois se digita do zero:
+ * negocio e selecao, cidade tem sugestao das que mais aparecem e usa o
+ * preenchimento automatico do proprio celular.
  */
 
 type Estado = 'parado' | 'enviando' | 'enviado' | 'erro';
+
+/**
+ * Cidades que mais aparecem — as mesmas citadas no FAQ como obras executadas.
+ * Serve so para acelerar a digitacao; qualquer outra cidade e aceita.
+ */
+const CIDADES_SUGERIDAS = [
+  'Maringá',
+  'Sarandi',
+  'Paiçandu',
+  'Marialva',
+  'Mandaguaçu',
+  'Londrina',
+  'Cascavel',
+  'Foz do Iguaçu',
+  'Guaíra',
+  'Curitiba',
+];
 
 interface Props {
   /** 'hero' aparece sobre fundo escuro; 'claro' no fechamento da pagina. */
@@ -55,6 +75,8 @@ export const Formulario: React.FC<Props> = ({ variante = 'hero', id }) => {
           nome: dados.get('nome'),
           contato: dados.get('contato'),
           email: dados.get('email'),
+          cidade: dados.get('cidade'),
+          tipo_negocio: dados.get('tipo_negocio'),
           necessidade: dados.get('necessidade'),
           origem: 'landing-camara-fria',
           website: dados.get('website'),
@@ -176,6 +198,52 @@ export const Formulario: React.FC<Props> = ({ variante = 'hero', id }) => {
             placeholder="seu@email.com"
             className={campo}
           />
+        </div>
+
+        <div>
+          <label className={rotulo} htmlFor={`${id}-cidade`}>
+            Cidade da instalação
+          </label>
+          <input
+            id={`${id}-cidade`}
+            name="cidade"
+            required
+            list={`${id}-cidades`}
+            /* address-level2 faz o proprio celular oferecer a cidade salva. */
+            autoComplete="address-level2"
+            placeholder="Onde o equipamento vai ficar"
+            className={campo}
+          />
+          {/* Sugestao, nao restricao: atendemos todo o Parana, entao a lista
+              acelera quem esta nas cidades comuns sem travar as demais. */}
+          <datalist id={`${id}-cidades`}>
+            {CIDADES_SUGERIDAS.map((c) => (
+              <option key={c} value={c} />
+            ))}
+          </datalist>
+        </div>
+
+        <div>
+          <label className={rotulo} htmlFor={`${id}-tipo-negocio`}>
+            Seu negócio
+          </label>
+          <select
+            id={`${id}-tipo-negocio`}
+            name="tipo_negocio"
+            required
+            defaultValue=""
+            className={campo}
+          >
+            <option value="" disabled>
+              Selecione
+            </option>
+            {SEGMENTOS.map((seg) => (
+              <option key={seg} value={seg}>
+                {seg}
+              </option>
+            ))}
+            <option value="Outro">Outro</option>
+          </select>
         </div>
 
         <div>
