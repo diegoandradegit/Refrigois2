@@ -77,7 +77,7 @@ export const ModalOrcamento: React.FC<Props> = ({ aberto, aoFechar }) => {
             <div aria-hidden="true" className="mx-auto mb-3 h-1 w-10 rounded-full bg-white/20 sm:hidden" />
             <p className="text-lg font-bold text-white">Peça seu orçamento</p>
             <p className="mt-1 text-sm text-slate-400">
-              Retornamos o contato para fazer o levantamento.
+              Preencha os campos abaixo. Leva menos de um minuto.
             </p>
           </div>
           <button
